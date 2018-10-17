@@ -1,1 +1,1 @@
-"# Anonymization" 
+# Anonymization
