@@ -1,0 +1,115 @@
+{
+	"name": "occupation",
+	"entries":
+	{
+		"all": 
+		{
+			"name": "*",
+			"gen": "all",
+			"level": 0
+		},
+		"Other":
+		{
+			"name": "Other",
+			"gen": "all",
+			"level": 1
+		},
+		"Nontechnical":
+		{
+			"name": "Nontechnical",
+			"gen": "all",
+			"level": 1
+		},
+		"Technical":
+		{
+			"name": "Technical",
+			"gen": "all",
+			"level": 1
+		},
+		"Armed-Forces":
+		{
+			"name": "Armed-Forces",
+			"gen": "Other",
+			"level": 2
+		},
+		"Protective-serv":
+		{
+			"name": "Protective-serv",
+			"gen": "Other",
+			"level": 2
+		},
+		"Priv-house-serv":
+		{
+			"name": "Priv-house-serv",
+			"gen": "Other",
+			"level": 2
+		},
+		"Transport-moving":
+		{
+			"name": "Transport-moving",
+			"gen": "Other",
+			"level": 2
+		},
+		"Farming-fishing":
+		{
+			"name": "Farming-fishing",
+			"gen": "Other",
+			"level": 2
+		},
+		"Adm-clerical":
+		{
+			"name": "Adm-clerical",
+			"gen": "Other",
+			"level": 2
+		},
+		"Machine-op-inspct":
+		{
+			"name": "Machine-op-inspct",
+			"gen": "Technical",
+			"level": 2
+		},
+		"Handlers-cleaners":
+		{
+			"name": "Handlers-cleaners",
+			"gen": "Nontechnical",
+			"level": 2
+		},
+		"Prof-specialty":
+		{
+			"name": "Prof-specialty",
+			"gen": "Technical",
+			"level": 2
+		},
+		"Exec-managerial":
+		{
+			"name": "Exec-managerial",
+			"gen": "Nontechnical",
+			"level": 2
+		},
+		"Sales":
+		{
+			"name": "Sales",
+			"gen": "Nontechnical",
+			"level": 2
+		},
+		"Other-service":
+		{
+			"name": "Other-service",
+			"gen": "Other",
+			"level": 2
+		},
+		"Craft-repair":
+		{
+			"name": "Craft-repair",
+			"gen": "Technical",
+			"level": 2
+		},
+		"Tech-support":
+		{
+			"name": "Tech-support",
+			"gen": "Technical",
+			"level": 2
+		}
+	}
+}
+	

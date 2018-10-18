@@ -1,0 +1,24 @@
+{
+	"name": "native-country",
+	"entries":
+	{
+		"all": 
+		{
+			"name": "*",
+			"gen": "all",
+			"level": 0
+		},
+		"United-States":
+		{
+			"name": "United-States",
+			"gen": "all",
+			"level": 1
+		},
+		"Non-US":
+		{
+			"name": "Non-US",
+			"gen": "all",
+			"level": 1
+		}
+	}
+}
