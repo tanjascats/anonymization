@@ -1,6 +1,6 @@
 import src.dataset as ds
 
-DATASET_PATH = '../data/adult_sample_num.csv'
+DATASET_PATH = '../data/adult_num_sample.csv'
 DATASET = ds.Dataset()
 
-K = 6
+K = 3

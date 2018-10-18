@@ -9,6 +9,7 @@ class Cluster:
 
         self._numerical_att = glob.DATASET.get_numerical()
         self._categorical_att = glob.DATASET.get_categorical()
+
         self._num_low_bound = self._nodes[0][self._numerical_att]
         self._num_up_bound = self._nodes[0][self._numerical_att]
         self._num_ranges = self.get_num_ranges()
@@ -51,7 +52,10 @@ class Cluster:
             elif node_value > upper:
                 new_range = node_value - lower
 
-            gil += new_range/original_ranges[num_att]
+            if original_ranges[num_att] != 0:
+                gil += new_range/original_ranges[num_att]
+            else:
+                gil += 0
 
         gil /= len(self._numerical_att)
         return gil
@@ -83,9 +87,17 @@ class Cluster:
     # giving the node index!!!
     def add_node(self, node_idx):
         # TODO
-        # false: try with simple adding
         self._nodes_idx.append(node_idx)
-        self._nodes.append(glob.DATASET.get_data().ix[node_idx])
-        # TODO there is more to update
+        node = glob.DATASET.get_data().ix[node_idx]
+        self._nodes.append(node)
+        # update lower bound, upper bound and range
+        for num_att in self._numerical_att:
+            if self._num_low_bound[num_att] > node[num_att]:
+                self._num_low_bound[num_att] = node[num_att]
+            if self._num_up_bound[num_att] > node[num_att]:
+                self._num_up_bound[num_att] = node[num_att]
+        self._num_ranges = self.get_num_ranges()
+        # TODO for categorical data
 
-        return True
+    def to_string(self):
+        return self._nodes_idx
