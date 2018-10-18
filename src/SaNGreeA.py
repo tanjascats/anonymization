@@ -56,8 +56,8 @@ def run():
         clusters.remove(best_candidate)
         best_candidate.append(node)
         clusters.append(best_candidate)
-    print("Done!\n - Found " + str(len(clusters)) + " clusters."
-                                                   "\n - Running time: " + str(int(time.time()-start)) + " seconds.")
+    print("Done!\n - Found " + str(len(clusters)) + " clusters." +
+          "\n - Running time: " + str(int(time.time()-start)) + " seconds.")
     return clusters
 
 

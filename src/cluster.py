@@ -83,4 +83,9 @@ class Cluster:
     # giving the node index!!!
     def add_node(self, node_idx):
         # TODO
+        # false: try with simple adding
+        self._nodes_idx.append(node_idx)
+        self._nodes.append(glob.DATASET.get_data().ix[node_idx])
+        # TODO there is more to update
+
         return True
