@@ -3,12 +3,13 @@ import src.globals as glob
 
 class Cluster:
     # initial_node and node in general is AN INDEX!!!!!!!!
-    def __init__(self, initial_node_idx):
+    def __init__(self, initial_node_idx, data):
+        self._data = data
         self._nodes_idx = [initial_node_idx]
-        self._nodes = [glob.DATASET.get_data().ix[initial_node_idx]]
+        self._nodes = [data.get_data().ix[initial_node_idx]]
 
-        self._numerical_att = glob.DATASET.get_numerical()
-        self._categorical_att = glob.DATASET.get_categorical()
+        self._numerical_att = data.get_numerical()
+        self._categorical_att = data.get_categorical()
 
         self._num_low_bound = self._nodes[0][self._numerical_att]
         self._num_up_bound = self._nodes[0][self._numerical_att]
@@ -18,7 +19,7 @@ class Cluster:
     # NODE IS AN INDEX!!!!
     def add_node(self, node_idx):
         self._nodes_idx.append(node_idx)
-        self._nodes.append(glob.DATASET[self._numerical_att].ix[node_idx])
+        self._nodes.append(self._data[self._numerical_att].ix[node_idx])
 
     def get_size(self):
         return len(self._nodes)
@@ -38,8 +39,8 @@ class Cluster:
     # calculating gil
     def calculate_gil(self, node_idx):
         # for each attribute calculate new range the cluster would need
-        node = glob.DATASET.get_data().ix[node_idx]
-        original_ranges = glob.DATASET.get_ranges()
+        node = self._data.get_data().ix[node_idx]
+        original_ranges = self._data.get_ranges()
         gil = 0
         for num_att in self._numerical_att:
             node_value = node[num_att]
@@ -61,7 +62,7 @@ class Cluster:
         return gil
 
     def calculate_ngil(self, node_idx):
-        return self.calculate_gil(node_idx)/(glob.DATASET.get_size()*glob.DATASET.get_num_of_attributes())
+        return self.calculate_gil(node_idx)/(self._data.get_size()*self._data.get_num_of_attributes())
 
 
 
@@ -88,7 +89,7 @@ class Cluster:
     def add_node(self, node_idx):
         # TODO
         self._nodes_idx.append(node_idx)
-        node = glob.DATASET.get_data().ix[node_idx]
+        node = self._data.get_data().ix[node_idx]
         self._nodes.append(node)
         # update lower bound, upper bound and range
         for num_att in self._numerical_att:

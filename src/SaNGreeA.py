@@ -1,17 +1,16 @@
 import src.globals as glob
 import src.cluster as cl
+import src.dataset as ds
 import time
 
 """
 Input: k, dataset
 Output: clustered dataset satisfying k-anonymity with optimized cost measure
 """
-# TODO go from simple to better arrangement
-data = glob.DATASET
-k = glob.K
+# TODO go from simple to better arrangemen
 
 
-def run():
+def run(data, k):
     start = time.time()
     print("Starting SaNGreeA algorithm with k=" + str(k) + ", " + str(data.get_size()) + " nodes and " +
           str(data.get_num_of_attributes()) + " attributes...")
@@ -22,7 +21,7 @@ def run():
     while len(undistributed) >= k:  # node is an index
         node = undistributed[0]  # INDEX
         # each cluster will at this point be full because of inner loop
-        cluster = cl.Cluster(node)  # initializing cluster with a node
+        cluster = cl.Cluster(node, data)  # initializing cluster with a node
         undistributed.remove(node)  # mark node as added
         # now start adding remaining nodes to the cluster until the cluster is big enough
         while cluster.get_size() < k:
@@ -64,7 +63,9 @@ def run():
 
 
 def main():
-    clusters = run()
+    data = ds.Dataset()
+    k = glob.K
+    clusters = run(data, k)
     for c in clusters:
         print(c.to_string())
 
