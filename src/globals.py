@@ -1,3 +1,6 @@
-DATASET = '../data/adult_sample.csv'
+import src.dataset as ds
 
-K = 3
+DATASET_PATH = '../data/adult_sample_num.csv'
+DATASET = ds.Dataset()
+
+K = 6
