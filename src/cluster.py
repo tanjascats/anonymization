@@ -62,6 +62,12 @@ class Cluster:
         # TODO gil for categorical
         # for each categorical att
         #   (hieght of hierarchy - 1 - level of attr)/ (height -1)
+        #   hierarchy.get_hight(cat_attribute)
+        #   take higher (smaller) level of cluster and node
+        #   cluster_level = self.cluster_level[att]
+        #   node_level = hierarchy.which_level(cat_att.value)
+        #   min(cluster_level, node_level)
+        #
         return gil
 
     def calculate_ngil(self, node_idx):
