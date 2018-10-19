@@ -7,7 +7,7 @@ import time
 Input: k, dataset
 Output: clustered dataset satisfying k-anonymity with optimized cost measure
 """
-# TODO go from simple to better arrangemen
+# TODO go from simple to better arrangement
 
 
 def run(data, k):
@@ -22,6 +22,7 @@ def run(data, k):
         node = undistributed[0]  # INDEX
         # each cluster will at this point be full because of inner loop
         cluster = cl.Cluster(node, data)  # initializing cluster with a node
+
         undistributed.remove(node)  # mark node as added
         # now start adding remaining nodes to the cluster until the cluster is big enough
         while cluster.get_size() < k:
@@ -32,6 +33,7 @@ def run(data, k):
             for candidate in undistributed:  # candidate is INDEX
                 # calculate their shittiness
                 curr_cost = cluster.calculate_gil(candidate)
+
                 if curr_cost < best_cost:
                     best_cost = curr_cost
                     best_candidate_idx = candidate
@@ -66,6 +68,7 @@ def main():
     data = ds.Dataset()
     k = glob.K
     clusters = run(data, k)
+    print("Clusters:")
     for c in clusters:
         print(c.to_string())
 

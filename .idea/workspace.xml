@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e9639b51-f808-4674-b3b4-a22d0f5c28c9" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/data/adult_num.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/adult_sample_num.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/adult_num_sample.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/adult_num_sample.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SaNGreeA.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/SaNGreeA.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cluster.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/cluster.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/globals.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/globals.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataset.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,39 +19,41 @@
     <session id="-253426742">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="3" />
+          <entry key="project.closed" value="5" />
           <entry key="project.open.time.0" value="2" />
+          <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.18" value="1" />
           <entry key="project.open.time.2" value="1" />
+          <entry key="project.open.time.7" value="1" />
           <entry key="project.open.time.8" value="1" />
-          <entry key="project.opened" value="5" />
+          <entry key="project.opened" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="adult_sample_num" value="1" />
           <entry key="cfg" value="1" />
-          <entry key="csv" value="19" />
+          <entry key="csv" value="26" />
           <entry key="json" value="8" />
           <entry key="md" value="2" />
-          <entry key="py" value="26" />
+          <entry key="py" value="28" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CSV" value="19" />
+          <entry key="CSV" value="26" />
           <entry key="JSON" value="8" />
           <entry key="Markdown" value="2" />
           <entry key="PLAIN_TEXT" value="2" />
-          <entry key="Python" value="26" />
+          <entry key="Python" value="28" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Python Console" value="2364" />
+          <entry key="Python Console" value="2605" />
           <entry key="csv" value="3" />
           <entry key="dummy" value="6" />
-          <entry key="py" value="10068" />
+          <entry key="py" value="10644" />
           <entry key="txt" value="58" />
         </counts>
       </usages-collector>
@@ -59,18 +61,71 @@
         <counts>
           <entry key="CSV" value="3" />
           <entry key="PLAIN_TEXT" value="64" />
-          <entry key="Python" value="12432" />
+          <entry key="Python" value="13249" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/SaNGreeA.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-629">
-              <caret line="23" column="51" selection-start-line="23" selection-start-column="51" selection-end-line="23" selection-end-column="51" />
+            <state relative-caret-position="73">
+              <caret line="70" column="20" selection-start-line="70" selection-start-column="20" selection-end-line="70" selection-end-column="20" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/globals.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="40" selection-start-line="2" selection-start-column="40" selection-end-line="2" selection-end-column="40" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/adult_num.csv">
+          <provider selected="true" editor-type-id="csv-text-editor">
+            <state relative-caret-position="227">
+              <caret line="1000" column="16" selection-end-line="1000" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/data/adult_num_sample.csv">
+          <provider selected="true" editor-type-id="csv-text-editor">
+            <state relative-caret-position="123">
+              <caret line="1000" column="16" selection-start-line="1000" selection-start-column="16" selection-end-line="1000" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/adult_sample.csv">
+          <provider selected="true" editor-type-id="csv-text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/utils.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" selection-start-line="4" selection-end-line="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/dataset.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="24">
+              <caret line="20" column="42" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -81,47 +136,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cluster.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1547">
-              <caret line="91" column="25" selection-start-line="91" selection-start-column="25" selection-end-line="91" selection-end-column="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/adult_num_sample.csv">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="75" selection-start-line="4" selection-start-column="75" selection-end-line="4" selection-end-column="75" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/globals.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="45" selection-start-line="2" selection-start-column="45" selection-end-line="2" selection-end-column="45" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/utils.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" selection-start-line="5" selection-end-line="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/dataset.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-85">
-              <caret line="10" column="56" lean-forward="true" selection-start-line="10" selection-start-column="56" selection-end-line="10" selection-end-column="56" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="17">
+              <caret line="55" column="45" selection-start-line="55" selection-start-column="45" selection-end-line="55" selection-end-column="45" />
             </state>
           </provider>
         </entry>
@@ -139,8 +155,9 @@
     <findStrings>
       <find>calculate_gil</find>
       <find>add_node</find>
-      <find>print</find>
       <find>read</find>
+      <find>best_candidate</find>
+      <find>print</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -154,12 +171,12 @@
         <option value="$PROJECT_DIR$/data/adult_sample.csv" />
         <option value="$PROJECT_DIR$/src/node.py" />
         <option value="$PROJECT_DIR$/data/adult_sample_num.csv" />
-        <option value="$PROJECT_DIR$/data/adult_num_sample.csv" />
-        <option value="$PROJECT_DIR$/src/dataset.py" />
         <option value="$PROJECT_DIR$/src/utils.py" />
-        <option value="$PROJECT_DIR$/src/globals.py" />
         <option value="$PROJECT_DIR$/src/cluster.py" />
+        <option value="$PROJECT_DIR$/src/dataset.py" />
         <option value="$PROJECT_DIR$/src/SaNGreeA.py" />
+        <option value="$PROJECT_DIR$/src/globals.py" />
+        <option value="$PROJECT_DIR$/data/adult_num_sample.csv" />
       </list>
     </option>
   </component>
@@ -175,6 +192,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -190,7 +208,8 @@
             <path>
               <item name="anonymization" type="b2602c69:ProjectViewProjectNode" />
               <item name="anonymization" type="462c0819:PsiDirectoryNode" />
-              <item name="papers" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="gen_hierarchies" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="anonymization" type="b2602c69:ProjectViewProjectNode" />
@@ -201,16 +220,19 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../mlhi-ass2-anonymization" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\tsarcevic\PycharmProjects\anonymization\data\" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\tsarcevic\PycharmProjects\anonymization\papers" />
+      <recent name="C:\Users\tsarcevic\PycharmProjects\anonymization\data\gen_hierarchies" />
       <recent name="C:\Users\tsarcevic\PycharmProjects\anonymization\data" />
+      <recent name="C:\Users\tsarcevic\PycharmProjects\anonymization\papers" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -322,14 +344,14 @@
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info content_ui="combo" id="Project" order="1" sideWeight="0.4973545" visible="true" weight="0.24960254" />
       <window_info id="Structure" order="2" sideWeight="0.5026455" side_tool="true" weight="0.24960254" />
-      <window_info anchor="bottom" id="Terminal" order="0" weight="0.37300178" />
+      <window_info anchor="bottom" id="Terminal" order="0" weight="0.22735347" />
       <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" />
-      <window_info anchor="bottom" id="Python Console" order="2" weight="0.46714032" />
+      <window_info anchor="bottom" id="Python Console" order="2" weight="0.6678508" />
       <window_info anchor="bottom" id="Message" order="3" />
-      <window_info anchor="bottom" id="Find" order="4" weight="0.60923624" />
+      <window_info anchor="bottom" id="Find" order="4" weight="0.38543516" />
       <window_info anchor="bottom" id="Version Control" order="5" weight="0.3285968" />
-      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.5168739" />
-      <window_info anchor="bottom" id="Debug" order="7" weight="0.3197158" />
+      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.71580815" />
+      <window_info anchor="bottom" id="Debug" order="7" weight="0.27708703" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="10" weight="0.3285968" />
@@ -383,12 +405,12 @@
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/SaNGreeA.py</url>
           <line>20</line>
-          <option name="timeStamp" value="5" />
+          <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/cluster.py</url>
           <line>39</line>
-          <option name="timeStamp" value="7" />
+          <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -437,13 +459,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/pandas/io/parsers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="786" selection-start-line="786" selection-end-line="786" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/gen_hierarchies/WorkClassGH.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -465,19 +480,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/adult_sample.csv">
-      <provider selected="true" editor-type-id="csv-text-editor">
-        <state relative-caret-position="119">
-          <caret line="504" column="100" selection-start-line="504" selection-start-column="100" selection-end-line="504" selection-end-column="100" />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="-884">
-          <caret line="32" column="100" selection-start-line="32" selection-start-column="100" selection-end-line="32" selection-end-column="100" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/adult_all.csv" />
+    <entry file="file://$PROJECT_DIR$/data/adult_sample.csv" />
     <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/pandas/core/indexes/base.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="81">
@@ -501,56 +504,78 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/data/adult_num_all.csv" />
     <entry file="file://$PROJECT_DIR$/data/adult_sample_num.csv" />
-    <entry file="file://$PROJECT_DIR$/src/cluster.py">
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/pandas/io/parsers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1547">
-          <caret line="91" column="25" selection-start-line="91" selection-start-column="25" selection-end-line="91" selection-end-column="25" />
+        <state relative-caret-position="73">
+          <caret line="786" selection-start-line="786" selection-end-line="786" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/adult_num_sample.csv">
-      <provider editor-type-id="csv-text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/data/adult_sample.csv">
+      <provider selected="true" editor-type-id="csv-text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
-          <caret line="4" column="75" selection-start-line="4" selection-start-column="75" selection-end-line="4" selection-end-column="75" />
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/adult_all.csv">
+      <provider selected="true" editor-type-id="csv-text-editor">
+        <state relative-caret-position="-51" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/dataset.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="24">
+          <caret line="20" column="42" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cluster.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="55" column="45" selection-start-line="55" selection-start-column="45" selection-end-line="55" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SaNGreeA.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="73">
+          <caret line="70" column="20" selection-start-line="70" selection-start-column="20" selection-end-line="70" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/globals.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
-          <caret line="2" column="45" selection-start-line="2" selection-start-column="45" selection-end-line="2" selection-end-column="45" />
+          <caret line="2" column="40" selection-start-line="2" selection-start-column="40" selection-end-line="2" selection-end-column="40" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
+    <entry file="file://$PROJECT_DIR$/data/adult_num.csv">
+      <provider selected="true" editor-type-id="csv-text-editor">
+        <state relative-caret-position="227">
+          <caret line="1000" column="16" selection-end-line="1000" selection-end-column="16" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/dataset.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-85">
-          <caret line="10" column="56" lean-forward="true" selection-start-line="10" selection-start-column="56" selection-end-line="10" selection-end-column="56" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
+    <entry file="file://$PROJECT_DIR$/data/adult_num_sample.csv">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="75" selection-start-line="4" selection-start-column="75" selection-end-line="4" selection-end-column="75" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/SaNGreeA.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-629">
-          <caret line="23" column="51" selection-start-line="23" selection-start-column="51" selection-end-line="23" selection-end-column="51" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
+      <provider selected="true" editor-type-id="csv-text-editor">
+        <state relative-caret-position="123">
+          <caret line="1000" column="16" selection-start-line="1000" selection-start-column="16" selection-end-line="1000" selection-end-column="16" />
         </state>
       </provider>
     </entry>

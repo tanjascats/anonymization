@@ -19,8 +19,6 @@ class Dataset:
         self._ranges_numerical = {col: max(self._dataset[col]) - min(self._dataset[col]) for col in self._numerical}
         # number of hierarchy levels for each categorical attribute
         # TODO I need hierarchies for this
-        for col in self._numerical:
-            print(max(self._dataset[col]))
         print("Ranges found:")
         pprint(self._ranges_numerical)
 

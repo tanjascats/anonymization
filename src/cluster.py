@@ -95,10 +95,10 @@ class Cluster:
         for num_att in self._numerical_att:
             if self._num_low_bound[num_att] > node[num_att]:
                 self._num_low_bound[num_att] = node[num_att]
-            if self._num_up_bound[num_att] > node[num_att]:
+            if self._num_up_bound[num_att] < node[num_att]:
                 self._num_up_bound[num_att] = node[num_att]
         self._num_ranges = self.get_num_ranges()
         # TODO for categorical data
 
     def to_string(self):
-        return self._nodes_idx
+        return str(self._nodes_idx)
