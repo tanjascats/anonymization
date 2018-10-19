@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e9639b51-f808-4674-b3b4-a22d0f5c28c9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/adult_sample.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/adult_sample.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SaNGreeA.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/SaNGreeA.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cluster.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/cluster.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/globals.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/globals.py" afterDir="false" />
-    </list>
+    <list default="true" id="e9639b51-f808-4674-b3b4-a22d0f5c28c9" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +97,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/cluster.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="714">
+            <state relative-caret-position="1632">
               <caret line="96" column="72" lean-forward="true" selection-start-line="96" selection-start-column="72" selection-end-line="96" selection-end-column="72" />
             </state>
           </provider>
@@ -161,10 +155,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-11" />
-    <option name="y" value="-11" />
-    <option name="width" value="1943" />
-    <option name="height" value="1043" />
+    <option name="x" value="2617" />
+    <option name="y" value="-1192" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -203,7 +197,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../mlhi-ass2-anonymization" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../anonymization-research" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -342,19 +336,18 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
-    <editor active="true" />
+    <frame x="2617" y="-1192" width="1936" height="1056" extended-state="6" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.4973545" visible="true" weight="0.24960254" />
+      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.4973545" visible="true" weight="0.1654373" />
       <window_info id="Structure" order="2" sideWeight="0.5026455" side_tool="true" weight="0.24960254" />
-      <window_info anchor="bottom" id="Terminal" order="0" weight="0.22557727" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="0" visible="true" weight="0.30552545" />
       <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="2" weight="0.6678508" />
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" weight="0.38543516" />
       <window_info anchor="bottom" id="Version Control" order="5" weight="0.3285968" />
-      <window_info anchor="bottom" id="Run" order="6" visible="true" weight="0.29129663" />
+      <window_info anchor="bottom" id="Run" order="6" weight="0.28063944" />
       <window_info anchor="bottom" id="Debug" order="7" weight="0.21847247" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
@@ -615,7 +608,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cluster.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
+        <state relative-caret-position="1632">
           <caret line="96" column="72" lean-forward="true" selection-start-line="96" selection-start-column="72" selection-end-line="96" selection-end-column="72" />
         </state>
       </provider>
