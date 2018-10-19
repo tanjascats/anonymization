@@ -41,7 +41,7 @@ def run(data, k, hierarchies):
                 if curr_cost < best_cost:
                     best_cost = curr_cost
                     best_candidate_idx = candidate
-
+            print(best_cost)
             cluster.add_node(best_candidate_idx)
             undistributed.remove(best_candidate_idx)
 
@@ -58,7 +58,6 @@ def run(data, k, hierarchies):
             if curr_cost < best_cost:
                 best_cost = curr_cost
                 best_candidate = cluster
-
         # i need to add node to the best candidate cluster
         clusters.remove(best_candidate)
         best_candidate.add_node(node)
@@ -83,6 +82,9 @@ def main():
     # initialize hierarchies
     # TODO
     hierarchies = generate_hierarchies(data)
+    print("Hierarchy levels:")
+    for att in data.get_categorical():
+        print(att + ": " + str(hierarchies[att].get_height()))
     # define k
     k = glob.K
     # run algorithm

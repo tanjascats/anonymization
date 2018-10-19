@@ -84,9 +84,18 @@ class Cluster:
         node = self._data.get_data().ix[node_idx]
         gil = 0
         for cat_att in self._categorical_att:
+            # size of hierarchy for the attribute
             hie_height = self._hierarchies[cat_att].get_height()
+            # current level for the cluster
             cluster_level = self._cluster_levels[cat_att]
+            # level of the node we want to evaluate
             node_level = self._hierarchies[cat_att].get_level(node[cat_att])
+            # if the levels are the same we need to check if the values of cluster and a node are the same
+            #   if not, att_level = node_level-1
+            #   if if they have the same value, att_level = node_level
+            # if the level of cluster and level of node are not the same we need to lower the level of node to the level of cluster
+            #   if then values are not the same att_level = node_level-1
+            #   if they are the same att_level = node_level
             att_level = min(cluster_level, node_level)
             gil += (hie_height-att_level) / hie_height
         gil /= len(self._categorical_att)
