@@ -59,6 +59,9 @@ class Cluster:
                 gil += 0
 
         gil /= len(self._numerical_att)
+        # TODO gil for categorical
+        # for each categorical att
+        #   (hieght of hierarchy - 1 - level of attr)/ (height -1)
         return gil
 
     def calculate_ngil(self, node_idx):

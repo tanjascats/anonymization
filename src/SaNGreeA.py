@@ -1,6 +1,7 @@
 import src.globals as glob
 import src.cluster as cl
 import src.dataset as ds
+import src.utils as utils
 import time
 
 """
@@ -65,9 +66,15 @@ def run(data, k):
 
 
 def main():
+    # initialize dataset
     data = ds.Dataset()
+    # initialize hierarchies
+    # TODO
+    # define k
     k = glob.K
+    # run algorithm
     clusters = run(data, k)
+    # output
     print("Clusters:")
     for c in clusters:
         print(c.to_string())
