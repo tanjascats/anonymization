@@ -3,8 +3,9 @@ import src.globals as glob
 
 class Cluster:
     # initial_node and node in general is AN INDEX!!!!!!!!
-    def __init__(self, initial_node_idx, data):
+    def __init__(self, initial_node_idx, data, hierarchies):
         self._data = data
+        self._hierarchies = hierarchies  # dict of hierarchies obejcts
         self._nodes_idx = [initial_node_idx]
         self._nodes = [data.get_data().ix[initial_node_idx]]
 
@@ -15,6 +16,7 @@ class Cluster:
         self._num_up_bound = self._nodes[0][self._numerical_att]
         self._num_ranges = self.get_num_ranges()
         # TODO categorical attr
+        self._cluster_levels = self.get_levels()
 
     # NODE IS AN INDEX!!!!
     def add_node(self, node_idx):
@@ -31,6 +33,15 @@ class Cluster:
     def get_num_ranges(self):
         ranges = {num_att: self.get_num_range(num_att) for num_att in self._numerical_att}
         return ranges
+
+    def get_levels(self):
+        levels = {}
+        node = self._nodes[0]
+        for cat_att in self._categorical_att:
+            node_value = node[cat_att]
+            level = self._hierarchies[cat_att].get_level(node_value)
+            levels[cat_att] = level
+        return levels
 
     """
     calculates the generalization information loss (GIL) 
@@ -67,8 +78,20 @@ class Cluster:
         #   cluster_level = self.cluster_level[att]
         #   node_level = hierarchy.which_level(cat_att.value)
         #   min(cluster_level, node_level)
-        #
         return gil
+
+    def calculate_cat_gil(self, node_idx):
+        node = self._data.get_data().ix[node_idx]
+        gil = 0
+        for cat_att in self._categorical_att:
+            hie_height = self._hierarchies[cat_att].get_height()
+            cluster_level = self._cluster_levels[cat_att]
+            node_level = self._hierarchies[cat_att].get_level(node[cat_att])
+            att_level = min(cluster_level, node_level)
+            gil += (hie_height-att_level) / hie_height
+        gil /= len(self._categorical_att)
+        return gil
+
 
     def calculate_ngil(self, node_idx):
         return self.calculate_gil(node_idx)/(self._data.get_size()*self._data.get_num_of_attributes())

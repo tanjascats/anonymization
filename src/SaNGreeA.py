@@ -2,6 +2,7 @@ import src.globals as glob
 import src.cluster as cl
 import src.dataset as ds
 import src.utils as utils
+import src.hierarchy as hie
 import time
 
 """
@@ -11,7 +12,7 @@ Output: clustered dataset satisfying k-anonymity with optimized cost measure
 # TODO go from simple to better arrangement
 
 
-def run(data, k):
+def run(data, k, hierarchies):
     start = time.time()
     print("Starting SaNGreeA algorithm with k=" + str(k) + ", " + str(data.get_size()) + " nodes and " +
           str(data.get_num_of_attributes()) + " attributes...")
@@ -22,7 +23,7 @@ def run(data, k):
     while len(undistributed) >= k:  # node is an index
         node = undistributed[0]  # INDEX
         # each cluster will at this point be full because of inner loop
-        cluster = cl.Cluster(node, data)  # initializing cluster with a node
+        cluster = cl.Cluster(node, data, hierarchies)  # initializing cluster with a node
 
         undistributed.remove(node)  # mark node as added
         # now start adding remaining nodes to the cluster until the cluster is big enough
@@ -33,7 +34,9 @@ def run(data, k):
             best_candidate_idx = undistributed[0]
             for candidate in undistributed:  # candidate is INDEX
                 # calculate their shittiness
-                curr_cost = cluster.calculate_gil(candidate)
+                # TODO
+                # curr_cost = cluster.calculate_gil(candidate)
+                curr_cost = cluster.calculate_cat_gil(candidate)
 
                 if curr_cost < best_cost:
                     best_cost = curr_cost
@@ -64,16 +67,26 @@ def run(data, k):
           "\n - Running time: " + str(int(time.time()-start)) + " seconds.")
     return clusters
 
+def generate_hierarchies(data):
+    # attribute and file path for each hie object
+    attributes = data.get_categorical()
+    file_paths = glob.HIERARCHY_FILE_PATHS
+    hierarchies = {}
+    for attribute in attributes:
+        hierarchies[attribute] = hie.Hierarchy(attribute, file_paths[attribute])
+    return hierarchies
+
 
 def main():
     # initialize dataset
     data = ds.Dataset()
     # initialize hierarchies
     # TODO
+    hierarchies = generate_hierarchies(data)
     # define k
     k = glob.K
     # run algorithm
-    clusters = run(data, k)
+    clusters = run(data, k, hierarchies)
     # output
     print("Clusters:")
     for c in clusters:
