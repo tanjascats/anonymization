@@ -12,7 +12,7 @@
     <session id="-253426742">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="5" />
+          <entry key="project.closed" value="6" />
           <entry key="project.open.time.0" value="2" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.18" value="1" />
@@ -155,10 +155,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="2617" />
-    <option name="y" value="-1192" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="x" value="-11" />
+    <option name="y" value="-11" />
+    <option name="width" value="1943" />
+    <option name="height" value="1043" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -336,12 +336,12 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="2617" y="-1192" width="1936" height="1056" extended-state="6" />
+    <frame x="697" y="-1208" width="1936" height="1176" extended-state="6" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info content_ui="combo" id="Project" order="1" sideWeight="0.4973545" visible="true" weight="0.1654373" />
       <window_info id="Structure" order="2" sideWeight="0.5026455" side_tool="true" weight="0.24960254" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="0" visible="true" weight="0.30552545" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="0" visible="true" weight="0.2703739" />
       <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="2" weight="0.6678508" />
       <window_info anchor="bottom" id="Message" order="3" />
