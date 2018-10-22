@@ -4,7 +4,8 @@ out_dir = '../output/'
 
 
 def output_csv(clusters, outfile):
-    out_string = "age, workclass, native-country, sex, race, marital-status, income\n"
+    out_string = "age, education-num, capital-gain, capital-loss, workclass, native-country, sex, " \
+                 "race, relationship, occupation, marital-status, income\n"
     for cluster in clusters:
         out_string += cluster.to_string()
 
