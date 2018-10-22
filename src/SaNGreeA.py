@@ -36,7 +36,7 @@ def run(data, k, hierarchies):
                 # calculate their shittiness
                 # TODO
                 # curr_cost = cluster.calculate_gil(candidate)
-                curr_cost = cluster.calculate_cat_gil(candidate)
+                curr_cost = cluster.calculate_gil(candidate)
 
                 if curr_cost < best_cost:
                     best_cost = curr_cost
