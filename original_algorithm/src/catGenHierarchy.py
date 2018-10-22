@@ -7,11 +7,10 @@ class CatGenHierarchy:
         self._label = ""
         self._entries = {}
         self._levels = 0
-        self.readFromJSON(genFile)
+        self.read_from_json(genFile)
 
-
-    def readFromJSON(self, json_file):
-        json_struct = json.readJSON(json_file)
+    def read_from_json(self, json_file):
+        json_struct = json.read_json(json_file)
         entries = json_struct.get('entries')
         root_levels = 0
 
@@ -35,29 +34,24 @@ class CatGenHierarchy:
         if root_levels != 1:
             raise Exception('JSON invalid. Level 0 must occur exactly once.')
 
-
-    def getEntries(self):
+    def get_entries(self):
         return self._entries
 
-
-    def nrLevels(self):
+    def nr_levels(self):
         return self._levels
 
-
-    def getLevelEntry(self, key):
+    def get_level_entry(self, key):
         return self._entries[key]['level']
 
-
-    def getGeneralizationOf(self, key):
+    def get_generalization_of(self, key):
         return self._entries[key]['gen']
 
-
-    def getNameEntry(self, key):
+    def get_name_entry(self, key):
         return self._entries[key]['name']
 
 
 if __name__ == '__main__':
     cgh = CatGenHierarchy('sex', '../data/gen_hierarchies/SexGH.json')
-    print(cgh.getEntries())
+    print(cgh.get_entries())
     print(cgh.getNrLevels())
-    print(cgh.getLevelEntry('Male'))
+    print(cgh.get_level_entry('Male'))

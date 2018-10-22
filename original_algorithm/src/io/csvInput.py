@@ -4,7 +4,7 @@ adult_file_name = '../../data/input_sanitized.csv'
 adj_list_file_name = '../../data/adult_graph_adj_list.csv'
 
 
-def readAdults(file_name):
+def read_adults(file_name):
     adult_file = open(file_name, 'r')
     adults_csv = csv.reader(adult_file, delimiter=',')
 
@@ -34,7 +34,7 @@ def readAdults(file_name):
     return adults
 
 
-def readAdjList(file_name):
+def read_adj_list(file_name):
     adj_list_file = open(file_name, 'r')
     adj_list_csv = csv.reader(adj_list_file, delimiter=',')
 
@@ -49,5 +49,5 @@ def readAdjList(file_name):
 
 
 if __name__ == "__main__":
-    print(readAdults(adult_file_name))
-    print(readAdjList(adj_list_file_name))
+    print(read_adults(adult_file_name))
+    print(read_adj_list(adj_list_file_name))

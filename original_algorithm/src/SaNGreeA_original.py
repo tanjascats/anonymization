@@ -12,7 +12,7 @@ adults_csv = '../../data/adult_sample.csv'
 genh_dir = '../../data/gen_hierarchies/'
 
 
-def prepareGenHierarchiesObject(dataset):
+def prepare_gen_hierarchies_object(dataset):
     # Prepare categorical generalization hierarchies
     genh_workclass = CGH.CatGenHierarchy('workclass', genh_dir + 'WorkClassGH.json')
     genh_country = CGH.CatGenHierarchy('native-country', genh_dir + 'NativeCountryBinGH.json')
@@ -98,9 +98,9 @@ def main():
     print("Starting SaNGreeA algorithm...")
 
     ## Prepare io data structures
-    adults = csv.readAdults(adults_csv)
+    adults = csv.read_adults(adults_csv)
 #    adj_list = csv.readAdjList(adj_list_csv)
-    gen_hierarchies = prepareGenHierarchiesObject(adults)
+    gen_hierarchies = prepare_gen_hierarchies_object(adults)
 
 
     ## Main variables needed for SaNGreeA
@@ -124,19 +124,19 @@ def main():
 
         ## SaNGreeA inner loop - Find nodes that minimize costs and
         ## add them to the cluster until cluster_size reaches k
-        while len(cluster.getNodes()) < GLOB.K_FACTOR:
+        while len(cluster.get_nodes()) < GLOB.K_FACTOR:
             best_cost = float('inf')  # woah
             # candidates from
             for candidate, v in ((k, v) for (k, v) in adults.items() if k > node):
                 if candidate in added and added[candidate] == True:
                     continue
 
-                cost = cluster.computeNodeCost(candidate)  # candidate is index of a data row; int
+                cost = cluster.compute_node_cost(candidate)  # candidate is index of a data row; int
                 if cost < best_cost:
                     best_cost = cost
                     best_candidate = candidate
 
-            cluster.addNode(best_candidate)  # index of best candidate
+            cluster.add_node(best_candidate)  # index of best candidate
             added[best_candidate] = True
 
         ## We have filled our cluster with k entries, push it to clusters
@@ -146,8 +146,7 @@ def main():
     print("Successfully built " + str(len(clusters)) + " clusters.")
     print("Running time: " + str(int(time.time() - start)) + " seconds.")
 
-    out.outputCSV(clusters, "anonymized_" + GLOB.VECTOR + '_weights_k_' + str(GLOB.K_FACTOR) + '.csv')
-
+    out.output_csv(clusters, "anonymized_" + GLOB.VECTOR + '_weights_k_' + str(GLOB.K_FACTOR) + '.csv')
 
 
 if __name__ == '__main__':

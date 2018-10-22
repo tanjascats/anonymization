@@ -11,8 +11,7 @@ class RangeGenHierarchy:
         self._min = float(min)
         self._max = float(max)
 
-
-    def getCostOfRange(self, low, high):
+    def get_cost_of_range(self, low, high):
         if low > high:
             raise Exception('Cannot generalize to negative range.')
 
@@ -22,4 +21,4 @@ class RangeGenHierarchy:
         if high > self._max:
             raise Exception('High parameter greater than range maximum.')
 
-        return ((high-low) / (self._max-self._min))
+        return (high-low)/(self._max-self._min)
