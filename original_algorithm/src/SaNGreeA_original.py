@@ -143,10 +143,12 @@ def main():
         clusters.append(cluster)
         print("\tCluster no." + str(len(clusters)) + " Processed nodes: " + str(i))
 
+    end_time = int(time.time() - start)
     print("Successfully built " + str(len(clusters)) + " clusters.")
-    print("Running time: " + str(int(time.time() - start)) + " seconds.")
+    print("Running time: " + str(end_time) + " seconds.")
 
     out.output_csv(clusters, "anonymized_" + GLOB.VECTOR + '_weights_k_' + str(GLOB.K_FACTOR) + '.csv')
+    out.output_stats(clusters, end_time, adults, "stats_k_" + str(GLOB.K_FACTOR) + ".txt")
 
 
 if __name__ == '__main__':

@@ -1,4 +1,4 @@
-age, workclass, native-country, sex, race, marital-status, income
+age, education-num, capital-gain, capital-loss, workclass, native-country, sex, race, relationship, occupation, marital-status, income
 [25 - 39], [10 - 13], [0 - 2174], 0, [40 - 42], *, United-States, Male, White, Not-in-family, Adm-clerical, Never-married, <=50K
 [25 - 39], [10 - 13], [0 - 2174], 0, [40 - 42], *, United-States, Male, White, Not-in-family, Adm-clerical, Never-married, <=50K
 [25 - 39], [10 - 13], [0 - 2174], 0, [40 - 42], *, United-States, Male, White, Not-in-family, Adm-clerical, Never-married, <=50K

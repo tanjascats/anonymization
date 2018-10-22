@@ -71,7 +71,6 @@ class NodeCluster:
         cat_hierarchy = self._genHierarchies['categorical'][gen_h]
         #
         cluster_level = self.compute_new_generalization(gen_h, node)[0]
-        print("Categorical cost: " + str(float((cat_hierarchy.nr_levels() - cluster_level) / cat_hierarchy.nr_levels())))
         return float((cat_hierarchy.nr_levels() - cluster_level) / cat_hierarchy.nr_levels())
 
     def compute_range_cost(self, gen_h, node):
@@ -121,7 +120,7 @@ class NodeCluster:
 
     def compute_node_cost(self, node):
         gil = self.compute_gil(node)  # node is int index of row
-        # print "GIL: " + str(gil)
+        print("GIL: " + str(gil))
         sil = self.computeSIL(node)
         # print "SIL: " + str(sil)
         return GLOB.ALPHA * gil + GLOB.BETA * sil
