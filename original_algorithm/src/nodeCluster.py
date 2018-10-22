@@ -78,10 +78,10 @@ class NodeCluster:
         # size of the interval / size of the original interval
         range_hierarchy = self._genHierarchies['range'][gen_h]
         range_features = self._genRangeFeatures[gen_h]
-        return range_hierarchy.getCostOfRange(min(range_features), max(range_features))
-
-        # Fake...
-        # return random.randint(0, 1)
+        node_value = self._dataset[node][gen_h]
+        range_cost = range_hierarchy.getCostOfRange(min(range_features[0], range_features[1], node_value),
+                                                    max(range_features[0], range_features[1], node_value))
+        return range_cost
 
     def computeNewGeneralization(self, gen_h, node):
         # TODO find the lowest common generalization level between cluster
