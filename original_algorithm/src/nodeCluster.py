@@ -7,11 +7,14 @@ class NodeCluster:
     # Allow initialization of a new cluster only with a node given
     def __init__(self, node, dataset=None, gen_hierarchies=None):
         self._nodes = [node]
+        #print("Nodes: " + str(self._nodes))
         self._dataset = dataset
+        #print("Dataset:  " + str(type(dataset)))
         self._neighborhoods = {
 #           node: self._adjList[node]
         }
         self._genHierarchies = gen_hierarchies
+        print(self._genHierarchies)
         self._genCatFeatures = {
             'workclass': self._dataset[node]['workclass'],
             'native-country': self._dataset[node]['native-country'],
@@ -90,6 +93,7 @@ class NodeCluster:
         n_value = self._dataset[node][gen_h]
         n_level = c_hierarchy.get_level_entry(n_value)
         c_value = self._genCatFeatures[gen_h]
+        print("c_value: " + str(c_value))
         c_level = c_hierarchy.get_level_entry(c_value)
 
         while n_value != c_value:
