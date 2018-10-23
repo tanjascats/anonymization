@@ -7,7 +7,7 @@ import original_algorithm.src.globals as GLOB
 import time
 
 # define input file here
-adults_csv = '../../data/adult_sample.csv'
+adults_csv = '../../data/adult_all.csv'
 #adj_list_csv = '../data/adult_graph_adj_list.csv'
 genh_dir = '../../data/gen_hierarchies/'
 

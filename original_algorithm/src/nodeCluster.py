@@ -120,7 +120,7 @@ class NodeCluster:
 
     def compute_node_cost(self, node):
         gil = self.compute_gil(node)  # node is int index of row
-        print("GIL: " + str(gil))
+        #print("GIL: " + str(gil))
         sil = self.computeSIL(node)
         # print "SIL: " + str(sil)
         return GLOB.ALPHA * gil + GLOB.BETA * sil
