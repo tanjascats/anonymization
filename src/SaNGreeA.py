@@ -3,6 +3,8 @@ import src.cluster as cl
 import src.dataset as ds
 import src.utils as utils
 import src.hierarchy as hie
+import src.cat_hierarchy as chie
+import src.range_hierarchy as rhie
 import time
 
 """
@@ -36,7 +38,7 @@ def run(data, k, hierarchies):
                 # calculate their shittiness
                 # TODO
                 # curr_cost = cluster.calculate_gil(candidate)
-                curr_cost = cluster.calculate_gil(candidate)
+                curr_cost = cluster.compute_gil(candidate)
 
                 if curr_cost < best_cost:
                     best_cost = curr_cost
@@ -66,14 +68,21 @@ def run(data, k, hierarchies):
           "\n - Running time: " + str(int(time.time()-start)) + " seconds.")
     return clusters
 
-def generate_hierarchies(data):
-    # attribute and file path for each hie object
-    attributes = data.get_categorical()
-    file_paths = glob.HIERARCHY_FILE_PATHS
-    hierarchies = {}
-    for attribute in attributes:
-        hierarchies[attribute] = hie.Hierarchy(attribute, file_paths[attribute])
-    return hierarchies
+
+def generate_hierarchies(dataset):
+    # Prepare categorical generalization hierarchies
+    gen_hierarchies = {'categorical': {}, 'range': {}}
+    for att in dataset.get_categorical():
+        genh = chie.CatGenHierarchy(att, glob.HIERARCHY_FILE_PATHS[att])
+        gen_hierarchies['categorical'][att] = genh
+
+    for att in dataset.get_numerical():
+        genh = rhie.RangeGenHierarchy(att, dataset.get_min(att), dataset.get_max(att))
+        gen_hierarchies['range'][att] = genh
+        print("Found" + str(att) + "range of: [" + str(dataset.get_min(att)) + ":" +
+              str(dataset.get_max(att)) + "]")
+
+    return gen_hierarchies
 
 
 def main():
@@ -82,9 +91,6 @@ def main():
     # initialize hierarchies
     # TODO
     hierarchies = generate_hierarchies(data)
-    print("Hierarchy levels:")
-    for att in data.get_categorical():
-        print(att + ": " + str(hierarchies[att].get_height()))
     # define k
     k = glob.K
     # run algorithm

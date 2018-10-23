@@ -16,12 +16,20 @@ class Dataset:
         # categorical attributes
         self._numerical = self._dataset.columns[self._dataset.dtypes != np.object].tolist()
         # ranges (min value, max value) for each numerical attribute
-        self._ranges_numerical = {col: max(self._dataset[col]) - min(self._dataset[col]) for col in self._numerical}
+        self._min_num = {col: min(self._dataset[col]) for col in self._numerical}
+        self._max_num = {col: max(self._dataset[col]) for col in self._numerical}
+        self._ranges_numerical = {col: self._max_num[col] - self._min_num[col] for col in self._numerical}
         # number of hierarchy levels for each categorical attribute
         # TODO I need hierarchies for this
 
         print("Ranges found:")
         pprint(self._ranges_numerical)
+
+    def get_min(self, att):
+        return self._min_num[att]
+
+    def get_max(self, att):
+        return self._max_num[att]
 
     def get_size(self):
         return self._dataset.shape[0]

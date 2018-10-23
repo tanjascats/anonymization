@@ -7,7 +7,7 @@ import original_algorithm.src.globals as GLOB
 import time
 
 # define input file here
-adults_csv = '../../data/adult_all.csv'
+adults_csv = '../../data/adult_sample.csv'
 #adj_list_csv = '../data/adult_graph_adj_list.csv'
 genh_dir = '../../data/gen_hierarchies/'
 
@@ -101,7 +101,7 @@ def main():
     adults = csv.read_adults(adults_csv)
 #    adj_list = csv.readAdjList(adj_list_csv)
     gen_hierarchies = prepare_gen_hierarchies_object(adults)
-
+    print("Hierarchies: " + str(gen_hierarchies))
 
     ## Main variables needed for SaNGreeA
     clusters = [] # Final output data structure holding all clusters
