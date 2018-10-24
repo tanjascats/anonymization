@@ -101,7 +101,6 @@ def main():
     adults = csv.read_adults(adults_csv)
 #    adj_list = csv.readAdjList(adj_list_csv)
     gen_hierarchies = prepare_gen_hierarchies_object(adults)
-    print("Hierarchies: " + str(gen_hierarchies))
 
     ## Main variables needed for SaNGreeA
     clusters = [] # Final output data structure holding all clusters
@@ -141,7 +140,7 @@ def main():
 
         ## We have filled our cluster with k entries, push it to clusters
         clusters.append(cluster)
-        print("\tCluster no." + str(len(clusters)) + " Processed nodes: " + str(i))
+        #print("\tCluster no." + str(len(clusters)) + " Processed nodes: " + str(i))
 
     end_time = int(time.time() - start)
     print("Successfully built " + str(len(clusters)) + " clusters.")
