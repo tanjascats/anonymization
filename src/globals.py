@@ -6,14 +6,14 @@ K_FACTOR = 11
 # Weight of the Generalization Information Loss
 ALPHA = 1
 
-# Weight of the Structural Information Loss
-BETA = 0
-
 # Target attribute
 TARGET = 'income'
 
 # Dataset file
 DATASET_CSV = '../data/adult_sample.csv'
+
+# Output directory
+OUTPUT_DIR = '../output/samples/'
 
 # Directory containing hierarchies
 GENH_DIR = '../data/gen_hierarchies/'
@@ -78,3 +78,4 @@ GEN_WEIGHT_VECTORS = {
 
 # Chosen weight vector
 VECTOR = 'equal'
+
