@@ -9,99 +9,37 @@ import time
 # TODO define input files in globals.py
 # define input file here
 adults_csv = '../../data/adult_sample.csv'
-#adj_list_csv = '../data/adult_graph_adj_list.csv'
+# adj_list_csv = '../data/adult_graph_adj_list.csv'
 genh_dir = '../../data/gen_hierarchies/'
 
-# TODO automatize this function
-def prepare_gen_hierarchies_object(dataset):
-    # Prepare categorical generalization hierarchies
-    genh_workclass = CGH.CatGenHierarchy('workclass', genh_dir + 'WorkClassGH.json')
-    genh_country = CGH.CatGenHierarchy('native-country', genh_dir + 'NativeCountryBinGH.json')
-    genh_sex = CGH.CatGenHierarchy('sex', genh_dir + 'SexGH.json')
-    genh_race = CGH.CatGenHierarchy('race', genh_dir + 'RaceGH.json')
-    genh_marital = CGH.CatGenHierarchy('marital-status', genh_dir + 'MaritalStatusGH.json')
-    genh_occupation = CGH.CatGenHierarchy('occupation', genh_dir + 'OccupationGH.json')
-    genh_relationship = CGH.CatGenHierarchy('relationship', genh_dir + 'RelationshipGH.json')
 
-    # Prepare the age range generalization hierarchy
-    min_age = float('inf')
-    max_age = float('-inf')
-    min_edu = float('inf')
-    max_edu = float('-inf')
-    min_cgain = float('inf')
-    max_cgain = float('-inf')
-    min_closs = float('inf')
-    max_closs = float('-inf')
-    min_hpw = float('inf')
-    max_hpw = float('-inf')
+def prepare_gen_hierarchies_object(dataset, numerical, categorical):
+    gen_hierarchies_mine = {'categorical': {}, 'range': {}}
 
-    # We have to set the age range before instantiating it's gen hierarchy
-    # Tanja: Also for every other range attribute
-    for idx in dataset:
-        idx_age = dataset[idx].get('age')
-        idx_edu = dataset[idx].get('education-num')
-        idx_cgain = dataset[idx].get('capital-gain')
-        idx_closs = dataset[idx].get('capital-loss')
-        idx_hpw = dataset[idx].get('hours-per-week')
+    # Prepare categorical attributes
+    for cat_att in categorical:
+        genh = CGH.CatGenHierarchy(cat_att, genh_dir + GLOB.GENH_FILE[cat_att])
+        gen_hierarchies_mine['categorical'][cat_att] = genh
 
-        min_age = idx_age if idx_age < min_age else min_age
-        max_age = idx_age if idx_age > max_age else max_age
+    # Prepare numerical attributes
+    for num_att in numerical:
+        column = [dataset[idx].get(num_att) for idx in range(len(dataset))]
+        min_val = min(column)
+        max_val = max(column)
+        print("Found " + str(num_att) + " range of: [" + str(min_val) + ":" + str(max_val) + "]")
+        genh = RGH.RangeGenHierarchy(num_att, min_val, max_val)
+        gen_hierarchies_mine['range'][num_att] = genh
 
-        min_edu = idx_edu if idx_edu < min_edu else min_edu
-        max_edu = idx_edu if idx_edu > max_edu else max_edu
-
-        min_cgain = idx_cgain if idx_cgain < min_cgain else min_cgain
-        max_cgain = idx_cgain if idx_cgain > max_cgain else max_cgain
-
-        min_closs = idx_closs if idx_closs < min_closs else min_closs
-        max_closs = idx_closs if idx_closs > max_closs else max_closs
-
-        min_hpw = idx_hpw if idx_hpw < min_hpw else min_hpw
-        max_hpw = idx_hpw if idx_hpw > max_hpw else max_hpw
-
-    print("Found age range of: [" + str(min_age) + ":" + str(max_age) + "]")
-    print("Found education range of: [" + str(min_edu) + ":" + str(max_edu) + "]")
-    print("Found capital gain range of: [" + str(min_cgain) + ":" + str(max_cgain) + "]")
-    print("Found capital loss range of: [" + str(min_closs) + ":" + str(max_closs) + "]")
-    print("Found hours per week range of: [" + str(min_hpw) + ":" + str(max_hpw) + "]")
-
-    genh_age = RGH.RangeGenHierarchy('age', min_age, max_age)
-    genh_edu = RGH.RangeGenHierarchy('education-num', min_edu, max_edu)
-    genh_cgain = RGH.RangeGenHierarchy('capital-gain', min_cgain, max_cgain)
-    genh_closs = RGH.RangeGenHierarchy('capital-loss', min_closs, max_closs)
-    genh_hpw = RGH.RangeGenHierarchy('hours-per-week', min_hpw, max_hpw)
-
-    # Let's create one central object holding all required gen hierarchies
-    # to pass around to node clusters during computation
-    gen_hierarchies = {
-        'categorical': {
-            'workclass': genh_workclass,
-            'native-country': genh_country,
-            'sex': genh_sex,
-            'race': genh_race,
-            'marital-status': genh_marital,
-            'occupation': genh_occupation,
-            'relationship': genh_relationship
-        },
-        'range': {
-            'age': genh_age,
-            'education-num': genh_edu,
-            'capital-gain': genh_cgain,
-            'capital-loss': genh_closs,
-            'hours-per-week': genh_hpw
-        }
-    }
-
-    return gen_hierarchies
+    return gen_hierarchies_mine
 
 
 def main():
     print("Starting SaNGreeA algorithm...")
 
     ## Prepare io data structures
-    adults = csv.read_adults(adults_csv)
-#    adj_list = csv.readAdjList(adj_list_csv)
-    gen_hierarchies = prepare_gen_hierarchies_object(adults)
+    # note: columns contain target attribute as well
+    adults, columns, numerical, categorical = csv.read_dataset(adults_csv)
+    gen_hierarchies = prepare_gen_hierarchies_object(adults, numerical, categorical)
 
     ## Main variables needed for SaNGreeA
     clusters = [] # Final output data structure holding all clusters

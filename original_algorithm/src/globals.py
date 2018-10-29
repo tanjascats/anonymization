@@ -9,6 +9,20 @@ ALPHA = 1
 # Weight of the Structural Information Loss
 BETA = 0
 
+# Target attribute
+TARGET = 'income'
+
+# Generalization hierarchies
+GENH_FILE = {
+    'workclass': 'WorkClassGH.json',
+    'native-country': 'NativeCountryBinGH.json',
+    'sex': 'SexGH.json',
+    'race': 'RaceGH.json',
+    'marital-status': 'MaritalStatusGH.json',
+    'occupation': 'OccupationGH.json',
+    'relationship': 'RelationshipGH.json'
+}
+
 # TODO automatize equal weight calculation
 # Weight vector for generalization categories
 GEN_WEIGHT_VECTORS = {
