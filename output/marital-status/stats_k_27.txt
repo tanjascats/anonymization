@@ -1,0 +1,4 @@
+Anonymized Adult dataset with 30162 entries and 12 attributes.
+k=27
+Successfully built 1118 clusters.
+Running time: 16882 seconds.
