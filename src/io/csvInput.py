@@ -1,4 +1,4 @@
-import original_algorithm.src.globals as GLOB
+import src.globals as GLOB
 
 import pandas as pd
 import numpy as np

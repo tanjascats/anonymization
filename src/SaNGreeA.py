@@ -1,104 +1,85 @@
-import src.globals as glob
-import src.cluster as cl
-import src.dataset as ds
-import src.utils as utils
-import src.hierarchy as hie
-import src.cat_hierarchy as chie
-import src.range_hierarchy as rhie
+import src.io.csvInput as csv
+import src.io.output as out
+import src.catGenHierarchy as CGH
+import src.rangeGenHierarchy as RGH
+import src.nodeCluster as CL
+import src.globals as GLOB
 import time
 
-"""
-Input: k, dataset
-Output: clustered dataset satisfying k-anonymity with optimized cost measure
-"""
-# TODO go from simple to better arrangement
 
+def prepare_gen_hierarchies_object(dataset, numerical, categorical):
+    gen_hierarchies_mine = {'categorical': {}, 'range': {}}
 
-def run(data, k, hierarchies):
-    start = time.time()
-    print("Starting SaNGreeA algorithm with k=" + str(k) + ", " + str(data.get_size()) + " nodes and " +
-          str(data.get_num_of_attributes()) + " attributes...")
-    clusters = []  # final output of the algorithm
-    undistributed = data.get_data().index.tolist()  # INDICES
-    remains = []
+    # Prepare categorical attributes
+    for cat_att in categorical:
+        genh = CGH.CatGenHierarchy(cat_att, GLOB.GENH_DIR + GLOB.GENH_FILE[cat_att])
+        gen_hierarchies_mine['categorical'][cat_att] = genh
 
-    while len(undistributed) >= k:  # node is an index
-        node = undistributed[0]  # INDEX
-        # each cluster will at this point be full because of inner loop
-        cluster = cl.Cluster(node, data, hierarchies)  # initializing cluster with a node
+    # Prepare numerical attributes
+    for num_att in numerical:
+        column = [dataset[idx].get(num_att) for idx in range(len(dataset))]
+        min_val = min(column)
+        max_val = max(column)
+        print("Found " + str(num_att) + " range of: [" + str(min_val) + ":" + str(max_val) + "]")
+        genh = RGH.RangeGenHierarchy(num_att, min_val, max_val)
+        gen_hierarchies_mine['range'][num_att] = genh
 
-        undistributed.remove(node)  # mark node as added
-        # now start adding remaining nodes to the cluster until the cluster is big enough
-        while cluster.get_size() < k:
-            # we need to find whe node with best cost
-            best_cost = float('inf')  # set best cost to infinity
-            # iterate over undistributed
-            best_candidate_idx = undistributed[0]
-            for candidate in undistributed:  # candidate is INDEX
-                # calculate their shittiness
-                # TODO
-                # curr_cost = cluster.calculate_gil(candidate)
-                curr_cost = cluster.compute_gil(candidate)
-
-                if curr_cost < best_cost:
-                    best_cost = curr_cost
-                    best_candidate_idx = candidate
-            print(best_cost)
-            cluster.add_node(best_candidate_idx)
-            undistributed.remove(best_candidate_idx)
-
-        # add cluster
-        clusters.append(cluster)
-
-    # if the last cluster stay of size less than k
-    for node in undistributed:  # node is INDEX
-        # find the best cluster to fit node into
-        best_cost = float('inf')
-        best_candidate = clusters[0]  # OBJECT cluster
-        for cluster in clusters:  # cluster is an object CLUSTER
-            curr_cost = cluster.calculate_gil(node)
-            if curr_cost < best_cost:
-                best_cost = curr_cost
-                best_candidate = cluster
-        # i need to add node to the best candidate cluster
-        clusters.remove(best_candidate)
-        best_candidate.add_node(node)
-        clusters.append(best_candidate)
-    print("Done!\n - Found " + str(len(clusters)) + " clusters." +
-          "\n - Running time: " + str(int(time.time()-start)) + " seconds.")
-    return clusters
-
-
-def generate_hierarchies(dataset):
-    # Prepare categorical generalization hierarchies
-    gen_hierarchies = {'categorical': {}, 'range': {}}
-    for att in dataset.get_categorical():
-        genh = chie.CatGenHierarchy(att, glob.HIERARCHY_FILE_PATHS[att])
-        gen_hierarchies['categorical'][att] = genh
-
-    for att in dataset.get_numerical():
-        genh = rhie.RangeGenHierarchy(att, dataset.get_min(att), dataset.get_max(att))
-        gen_hierarchies['range'][att] = genh
-        print("Found" + str(att) + "range of: [" + str(dataset.get_min(att)) + ":" +
-              str(dataset.get_max(att)) + "]")
-
-    return gen_hierarchies
+    return gen_hierarchies_mine
 
 
 def main():
-    # initialize dataset
-    data = ds.Dataset()
-    # initialize hierarchies
-    # TODO
-    hierarchies = generate_hierarchies(data)
-    # define k
-    k = glob.K
-    # run algorithm
-    clusters = run(data, k, hierarchies)
-    # output
-    print("Clusters:")
-    for c in clusters:
-        print(c.to_string())
+    print("Starting SaNGreeA algorithm...")
+
+    # Prepare io data structures
+    # note: columns contain target attribute as well
+    adults, columns, numerical, categorical = csv.read_dataset(GLOB.DATASET_CSV)
+    gen_hierarchies = prepare_gen_hierarchies_object(adults, numerical, categorical)
+
+    # Main variables needed for SaNGreeA
+    clusters = []  # Final output data structure holding all clusters
+    best_candidate = None  # the currently best candidate by costs
+    added = {}  # dict containing all nodes already added to clusters
+
+    # Runtime
+    start = time.time()
+
+    # MAIN LOOP
+    for i, node in enumerate(adults):
+        if node in added and added[node] is True:
+            continue
+
+        # Initialize new cluster with given node
+        cluster = CL.NodeCluster(node, adults, gen_hierarchies, columns, categorical, numerical)
+
+        # Mark node as added
+        added[node] = True
+
+        # SaNGreeA inner loop - Find nodes that minimize costs and
+        # add them to the cluster until cluster_size reaches k
+        while len(cluster.get_nodes()) < GLOB.K_FACTOR:
+            best_cost = float('inf')
+            # candidates from
+            for candidate, v in ((k, v) for (k, v) in adults.items() if k > node):
+                if candidate in added and added[candidate] is True:
+                    continue
+
+                cost = cluster.compute_node_cost(candidate)  # candidate is index of a data row; int
+                if cost < best_cost:
+                    best_cost = cost
+                    best_candidate = candidate
+
+            cluster.add_node(best_candidate)  # index of best candidate
+            added[best_candidate] = True
+
+        # We have filled our cluster with k entries, push it to clusters
+        clusters.append(cluster)
+
+    end_time = int(time.time() - start)
+    print("Successfully built " + str(len(clusters)) + " clusters.")
+    print("Running time: " + str(end_time) + " seconds.")
+
+    out.output_csv(clusters, columns, "anonymized_" + GLOB.VECTOR + '_weights_k_' + str(GLOB.K_FACTOR) + '.csv')
+    out.output_stats(clusters, end_time, adults, "stats_k_" + str(GLOB.K_FACTOR) + ".txt")
 
 
 if __name__ == '__main__':
