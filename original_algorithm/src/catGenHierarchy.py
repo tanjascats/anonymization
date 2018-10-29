@@ -3,13 +3,12 @@ import original_algorithm.src.io.jsonInput as json
 
 class CatGenHierarchy:
 
-    def __init__(self, label, genFile):
+    def __init__(self, label, gen_file):
         self._label = ""
         self._entries = {}
         self._levels = 0
-        self.read_from_json(genFile)
+        self.read_from_json(gen_file)
 
-    # TODO make reading json in better way (much shorter code is possible)
     def read_from_json(self, json_file):
         json_struct = json.read_json(json_file)
         entries = json_struct.get('entries')
@@ -46,5 +45,4 @@ class CatGenHierarchy:
 if __name__ == '__main__':
     cgh = CatGenHierarchy('sex', '../data/gen_hierarchies/SexGH.json')
     print(cgh.get_entries())
-    print(cgh.getNrLevels())
     print(cgh.get_level_entry('Male'))

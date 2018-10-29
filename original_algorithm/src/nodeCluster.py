@@ -1,5 +1,6 @@
 import original_algorithm.src.globals as GLOB
 
+
 class NodeCluster:
     # Allow initialization of a new cluster only with a node given
     def __init__(self, node, dataset=None, gen_hierarchies=None, attributes=None, categorical=None, numerical=None):
@@ -46,7 +47,7 @@ class NodeCluster:
             weight = weight_vector['range'][genRangeFeatureKey]
             costs += weight * self.compute_range_cost(genRangeFeatureKey, node)
 
-        return costs  # / float(len(self._genCatFeatures) + len(self._genRangeFeatures))
+        return costs
 
     def compute_categorical_cost(self, gen_h, node):
         # get the attribute's generalization tree
@@ -91,7 +92,6 @@ class NodeCluster:
 
     def compute_node_cost(self, node):
         gil = self.compute_gil(node)  # node is int index of row
-        # print "SIL: " + str(sil)
         return GLOB.ALPHA * gil
 
     def to_string(self):

@@ -9,7 +9,6 @@ import time
 # TODO define input files in globals.py
 # define input file here
 adults_csv = '../../data/adult_sample.csv'
-# adj_list_csv = '../data/adult_graph_adj_list.csv'
 genh_dir = '../../data/gen_hierarchies/'
 
 
@@ -36,20 +35,20 @@ def prepare_gen_hierarchies_object(dataset, numerical, categorical):
 def main():
     print("Starting SaNGreeA algorithm...")
 
-    ## Prepare io data structures
+    # Prepare io data structures
     # note: columns contain target attribute as well
     adults, columns, numerical, categorical = csv.read_dataset(adults_csv)
     gen_hierarchies = prepare_gen_hierarchies_object(adults, numerical, categorical)
 
-    ## Main variables needed for SaNGreeA
-    clusters = [] # Final output data structure holding all clusters
-    best_candidate = None # the currently best candidate by costs
-    added = {} # dict containing all nodes already added to clusters
+    # Main variables needed for SaNGreeA
+    clusters = []  # Final output data structure holding all clusters
+    best_candidate = None  # the currently best candidate by costs
+    added = {}  # dict containing all nodes already added to clusters
 
-    ## Runtime
+    # Runtime
     start = time.time()
 
-    ## MAIN LOOP
+    # MAIN LOOP
     for i, node in enumerate(adults):
         if node in added and added[node] == True:
             continue
@@ -60,13 +59,13 @@ def main():
         # Mark node as added
         added[node] = True
 
-        ## SaNGreeA inner loop - Find nodes that minimize costs and
-        ## add them to the cluster until cluster_size reaches k
+        # SaNGreeA inner loop - Find nodes that minimize costs and
+        # add them to the cluster until cluster_size reaches k
         while len(cluster.get_nodes()) < GLOB.K_FACTOR:
-            best_cost = float('inf')  # woah
+            best_cost = float('inf')
             # candidates from
             for candidate, v in ((k, v) for (k, v) in adults.items() if k > node):
-                if candidate in added and added[candidate] == True:
+                if candidate in added and added[candidate] is True:
                     continue
 
                 cost = cluster.compute_node_cost(candidate)  # candidate is index of a data row; int
@@ -77,9 +76,8 @@ def main():
             cluster.add_node(best_candidate)  # index of best candidate
             added[best_candidate] = True
 
-        ## We have filled our cluster with k entries, push it to clusters
+        # We have filled our cluster with k entries, push it to clusters
         clusters.append(cluster)
-        #print("\tCluster no." + str(len(clusters)) + " Processed nodes: " + str(i))
 
     end_time = int(time.time() - start)
     print("Successfully built " + str(len(clusters)) + " clusters.")
