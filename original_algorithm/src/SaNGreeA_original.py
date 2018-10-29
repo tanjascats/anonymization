@@ -6,12 +6,13 @@ import original_algorithm.src.nodeCluster as CL
 import original_algorithm.src.globals as GLOB
 import time
 
+# TODO define input files in globals.py
 # define input file here
 adults_csv = '../../data/adult_sample.csv'
 #adj_list_csv = '../data/adult_graph_adj_list.csv'
 genh_dir = '../../data/gen_hierarchies/'
 
-
+# TODO automatize this function
 def prepare_gen_hierarchies_object(dataset):
     # Prepare categorical generalization hierarchies
     genh_workclass = CGH.CatGenHierarchy('workclass', genh_dir + 'WorkClassGH.json')

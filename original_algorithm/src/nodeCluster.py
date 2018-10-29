@@ -3,7 +3,7 @@ import random
 
 
 class NodeCluster:
-
+    # TODO cleanup - remove everything network related (I am not using this in my solution)
     # Allow initialization of a new cluster only with a node given
     def __init__(self, node, dataset=None, gen_hierarchies=None):
         self._nodes = [node]
@@ -15,6 +15,7 @@ class NodeCluster:
         }
         self._genHierarchies = gen_hierarchies
         #print(self._genHierarchies)
+        # TODO automatize
         self._genCatFeatures = {
             'workclass': self._dataset[node]['workclass'],
             'native-country': self._dataset[node]['native-country'],
@@ -24,6 +25,7 @@ class NodeCluster:
             'relationship': self._dataset[node]['relationship'],
             'occupation': self._dataset[node]['occupation']
         }
+        # TODO automatize
         self._genRangeFeatures = {
             'age': [self._dataset[node]['age'], self._dataset[node]['age']],
             'education-num': [self._dataset[node]['education-num'], self._dataset[node]['education-num']],
@@ -77,7 +79,6 @@ class NodeCluster:
         return float((cat_hierarchy.nr_levels() - cluster_level) / cat_hierarchy.nr_levels())
 
     def compute_range_cost(self, gen_h, node):
-        # TODO implement range cost function
         # size of the interval / size of the original interval
         range_hierarchy = self._genHierarchies['range'][gen_h]
         range_features = self._genRangeFeatures[gen_h]
@@ -87,7 +88,6 @@ class NodeCluster:
         return range_cost
 
     def compute_new_generalization(self, gen_h, node):
-        # TODO find the lowest common generalization level between cluster
         # and node and return level as well as the exact (string) value
         c_hierarchy = self._genHierarchies['categorical'][gen_h]
         n_value = self._dataset[node][gen_h]
@@ -127,7 +127,7 @@ class NodeCluster:
         sil = self.computeSIL(node)
         # print "SIL: " + str(sil)
         return GLOB.ALPHA * gil + GLOB.BETA * sil
-
+    # TODO automatize this function
     def to_string(self):
         out_string = ""
 

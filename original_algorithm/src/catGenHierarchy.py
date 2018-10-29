@@ -9,6 +9,7 @@ class CatGenHierarchy:
         self._levels = 0
         self.read_from_json(genFile)
 
+    # TODO make reading json in better way (much shorter code is possible)
     def read_from_json(self, json_file):
         json_struct = json.read_json(json_file)
         entries = json_struct.get('entries')

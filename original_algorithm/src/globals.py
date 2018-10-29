@@ -9,6 +9,7 @@ ALPHA = 1
 # Weight of the Structural Information Loss
 BETA = 0
 
+# TODO automatize equal weight calculation
 # Weight vector for generalization categories
 GEN_WEIGHT_VECTORS = {
     'equal': {
