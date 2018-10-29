@@ -3,7 +3,6 @@ import original_algorithm.src.globals as GLOB
 
 out_dir = '../output/'
 
-# TODO automatize and fix
 def output_csv(clusters, columns, outfile):
     out_string = ""
     for i, col in enumerate(columns):

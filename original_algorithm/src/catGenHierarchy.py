@@ -13,10 +13,9 @@ class CatGenHierarchy:
     def read_from_json(self, json_file):
         json_struct = json.read_json(json_file)
         entries = json_struct.get('entries')
-        root_levels = 0
+        self._entries = entries
 
-        # Walking through JSON struct and copying each entry is probably
-        # not necessary in python, but at least we make sure level is an int
+        root_levels = 0
         for idx in entries:
             json_entry = entries[idx]
 
@@ -24,13 +23,6 @@ class CatGenHierarchy:
             self._levels = level if level > self._levels else self._levels
             if level == 0:
                 root_levels += 1
-
-            entry = {
-                'level': level,
-                'name': json_entry.get('name'),
-                'gen': json_entry.get('gen')
-            }
-            self._entries[idx] = entry
 
         if root_levels != 1:
             raise Exception('JSON invalid. Level 0 must occur exactly once.')

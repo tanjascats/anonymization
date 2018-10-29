@@ -1,9 +1,6 @@
 import original_algorithm.src.globals as GLOB
-import random
 
-# TODO fix that the attributes in output are the same as in input
 class NodeCluster:
-    # TODO cleanup - remove everything network related (I am not using this in my solution)
     # Allow initialization of a new cluster only with a node given
     def __init__(self, node, dataset=None, gen_hierarchies=None, attributes=None, categorical=None, numerical=None):
         self._nodes = [node]
