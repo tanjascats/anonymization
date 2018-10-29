@@ -55,7 +55,7 @@ def main():
             continue
 
         # Initialize new cluster with given node
-        cluster = CL.NodeCluster(node, adults, gen_hierarchies)
+        cluster = CL.NodeCluster(node, adults, gen_hierarchies, columns, categorical, numerical)
 
         # Mark node as added
         added[node] = True
@@ -85,7 +85,7 @@ def main():
     print("Successfully built " + str(len(clusters)) + " clusters.")
     print("Running time: " + str(end_time) + " seconds.")
 
-    out.output_csv(clusters, "anonymized_" + GLOB.VECTOR + '_weights_k_' + str(GLOB.K_FACTOR) + '.csv')
+    out.output_csv(clusters, columns, "anonymized_" + GLOB.VECTOR + '_weights_k_' + str(GLOB.K_FACTOR) + '.csv')
     out.output_stats(clusters, end_time, adults, "stats_k_" + str(GLOB.K_FACTOR) + ".txt")
 
 

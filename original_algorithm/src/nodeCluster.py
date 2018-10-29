@@ -1,60 +1,40 @@
 import original_algorithm.src.globals as GLOB
 import random
 
-
+# TODO fix that the attributes in output are the same as in input
 class NodeCluster:
     # TODO cleanup - remove everything network related (I am not using this in my solution)
     # Allow initialization of a new cluster only with a node given
-    def __init__(self, node, dataset=None, gen_hierarchies=None):
+    def __init__(self, node, dataset=None, gen_hierarchies=None, attributes=None, categorical=None, numerical=None):
         self._nodes = [node]
-        #print("Nodes: " + str(self._nodes))
         self._dataset = dataset
-        #print("Dataset:  " + str(type(dataset)))
-        self._neighborhoods = {
-#           node: self._adjList[node]
-        }
         self._genHierarchies = gen_hierarchies
-        #print(self._genHierarchies)
-        # TODO automatize
-        self._genCatFeatures = {
-            'workclass': self._dataset[node]['workclass'],
-            'native-country': self._dataset[node]['native-country'],
-            'sex': self._dataset[node]['sex'],
-            'race': self._dataset[node]['race'],
-            'marital-status': self._dataset[node]['marital-status'],
-            'relationship': self._dataset[node]['relationship'],
-            'occupation': self._dataset[node]['occupation']
-        }
-        # TODO automatize
-        self._genRangeFeatures = {
-            'age': [self._dataset[node]['age'], self._dataset[node]['age']],
-            'education-num': [self._dataset[node]['education-num'], self._dataset[node]['education-num']],
-            'capital-gain': [self._dataset[node]['capital-gain'], self._dataset[node]['capital-gain']],
-            'capital-loss': [self._dataset[node]['capital-loss'], self._dataset[node]['capital-loss']],
-            'hours-per-week': [self._dataset[node]['hours-per-week'], self._dataset[node]['hours-per-week']]
-        }
+        self._attributes = attributes
+        self._categorical = categorical
+        self._numerical = numerical
+        self._genCatFeatures = {}
+        self._genRangeFeatures = {}
+
+        for att in self._attributes:
+            if att in self._categorical:
+                self._genCatFeatures[att] = self._dataset[node][att]
+            elif att in self._numerical:
+                self._genRangeFeatures[att] = [self._dataset[node][att], self._dataset[node][att]]
 
     def get_nodes(self):
         return self._nodes
 
-    def get_neighborhoods(self):
-        return self._neighborhoods
-
     def add_node(self, node):
         self._nodes.append(node)
-#        self._neighborhoods[node] = self._adjList[node]
 
         # Updating feature levels and ranges
-
         for genCatFeatureKey in self._genCatFeatures:
             self._genCatFeatures[genCatFeatureKey] = self.compute_new_generalization(genCatFeatureKey, node)[1]
-        # print self._genCatFeatures
 
         for genRangeFeatureKey in self._genRangeFeatures:
             range = self._genRangeFeatures[genRangeFeatureKey]
             self._genRangeFeatures[genRangeFeatureKey] = self.expand_range(range,
                                                                            self._dataset[node][genRangeFeatureKey])
-        # print self._genRangeFeatures
 
     def compute_gil(self, node):
         costs = 0.0
@@ -74,7 +54,6 @@ class NodeCluster:
     def compute_categorical_cost(self, gen_h, node):
         # get the attribute's generalization tree
         cat_hierarchy = self._genHierarchies['categorical'][gen_h]
-        #
         cluster_level = self.compute_new_generalization(gen_h, node)[0]
         return float((cat_hierarchy.nr_levels() - cluster_level) / cat_hierarchy.nr_levels())
 
@@ -107,14 +86,6 @@ class NodeCluster:
                 c_level -= 1
 
         return [c_level, c_value]
-        # Fake...
-        # return [0, "generalized!"]
-
-    def computeSIL(self, node):
-        # TODO implement SIL function with binary neighborhood vectors
-
-        # Fake...
-        return random.randint(0, 1)
 
     def expand_range(self, range, nr):
         min = nr if nr < range[0] else range[0]
@@ -123,57 +94,28 @@ class NodeCluster:
 
     def compute_node_cost(self, node):
         gil = self.compute_gil(node)  # node is int index of row
-        #print("GIL: " + str(gil))
-        sil = self.computeSIL(node)
         # print "SIL: " + str(sil)
-        return GLOB.ALPHA * gil + GLOB.BETA * sil
-    # TODO automatize this function
+        return GLOB.ALPHA * gil
+
     def to_string(self):
         out_string = ""
 
         for count in range(0, len(self._nodes)):
+            for att in self._attributes:
+                if att in self._numerical:
+                    val = self._genRangeFeatures[att]
+                    if val[0] == val[1]:
+                        out_string += str(val[0]) + ", "
+                    else:
+                        out_string += "[" + str(val[0]) + " - " + str(val[1]) + "], "
 
-            # Non-automatic, but therefore in the right order...
+                elif att in self._categorical:
+                    out_string += self._genCatFeatures[att] + ", "
 
-            age = self._genRangeFeatures['age']
-            if age[0] == age[1]:
-                out_string += str(age[0]) + ", "
-            else:
-                out_string += "[" + str(age[0]) + " - " + str(age[1]) + "], "
-
-            edu_num = self._genRangeFeatures['education-num']
-            if edu_num[0] == edu_num[1]:
-                out_string += str(edu_num[0]) + ", "
-            else:
-                out_string += "[" + str(edu_num[0]) + " - " + str(edu_num[1]) + "], "
-
-            cap_gain = self._genRangeFeatures['capital-gain']
-            if cap_gain[0] == cap_gain[1]:
-                out_string += str(cap_gain[0]) + ", "
-            else:
-                out_string += "[" + str(cap_gain[0]) + " - " + str(cap_gain[1]) + "], "
-
-            cap_loss = self._genRangeFeatures['capital-loss']
-            if cap_loss[0] == cap_loss[1]:
-                out_string += str(cap_loss[0]) + ", "
-            else:
-                out_string += "[" + str(cap_loss[0]) + " - " + str(cap_loss[1]) + "], "
-
-            hpw = self._genRangeFeatures['hours-per-week']
-            if hpw[0] == hpw[1]:
-                out_string += str(hpw[0]) + ", "
-            else:
-                out_string += "[" + str(hpw[0]) + " - " + str(hpw[1]) + "], "
-
-            out_string += self._genCatFeatures['workclass'] + ", "
-            out_string += self._genCatFeatures['native-country'] + ", "
-            out_string += self._genCatFeatures['sex'] + ", "
-            out_string += self._genCatFeatures['race'] + ", "
-            out_string += self._genCatFeatures['relationship'] + ", "
-            out_string += self._genCatFeatures['occupation'] + ", "
-            out_string += self._genCatFeatures['marital-status'] + ", "
-            node = self._nodes[count]
-            out_string += self._dataset[node]['income'] + "\n"
+                else:
+                    node = self._nodes[count]
+                    out_string += self._dataset[node][att] + "\n"
 
         out_string = out_string.replace("all", "*")
+
         return out_string
