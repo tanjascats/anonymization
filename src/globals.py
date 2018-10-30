@@ -7,13 +7,13 @@ K_FACTOR = 11
 ALPHA = 1
 
 # Target attribute
-TARGET = 'income'
+TARGET = 'education-num'
 
 # Dataset file
 DATASET_CSV = '../data/adult_sample.csv'
 
 # Output directory
-OUTPUT_DIR = '../output/samples/'
+OUTPUT_DIR = '../output/samples/education-number/'
 
 # Directory containing hierarchies
 GENH_DIR = '../data/gen_hierarchies/'
@@ -26,7 +26,8 @@ GENH_FILE = {
     'race': 'RaceGH.json',
     'marital-status': 'MaritalStatusGH.json',
     'occupation': 'OccupationGH.json',
-    'relationship': 'RelationshipGH.json'
+    'relationship': 'RelationshipGH.json',
+    'income': 'IncomeGH.json'
 }
 
 # Weight vector for generalization categories
@@ -39,7 +40,8 @@ GEN_WEIGHT_VECTORS = {
             'race': 1.0/12.0,
             'marital-status': 1.0/12.0,
             'occupation': 1.0/12.0,
-            'relationship': 1.0/12.0
+            'relationship': 1.0/12.0,
+            'income': 1.0/12.0
         },
         'range': {
             'age': 1.0/12.0,

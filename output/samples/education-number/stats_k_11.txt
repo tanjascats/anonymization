@@ -1,5 +1,5 @@
 Anonymized Adult dataset with 1000 entries and 12 attributes.
 k=11
-Target attribute: income
+Target attribute: education-num
 Successfully built 91 clusters.
 Running time: 13 seconds.
