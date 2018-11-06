@@ -98,20 +98,23 @@ class NodeCluster:
         out_string = ""
 
         for count in range(0, len(self._nodes)):
-            for att in self._attributes:
+            for i, att in enumerate(self._attributes):
+                if i:
+                    out_string += ", "
                 if att in self._numerical:
                     val = self._genRangeFeatures[att]
                     if val[0] == val[1]:
-                        out_string += str(val[0]) + ", "
+                        out_string += str(val[0])
                     else:
-                        out_string += "[" + str(val[0]) + " - " + str(val[1]) + "], "
+                        out_string += "[" + str(val[0]) + " - " + str(val[1]) + "]"
 
                 elif att in self._categorical:
-                    out_string += self._genCatFeatures[att] + ", "
+                    out_string += self._genCatFeatures[att]
 
                 else:
                     node = self._nodes[count]
-                    out_string += self._dataset[node][att] + "\n"
+                    out_string += str(self._dataset[node][att])
+            out_string += "\n"
 
         out_string = out_string.replace("all", "*")
 
