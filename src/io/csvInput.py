@@ -1,4 +1,4 @@
-import src.globals as GLOB
+import src.config as GLOB
 
 import pandas as pd
 import numpy as np

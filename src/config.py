@@ -1,7 +1,7 @@
 # GLOBAL VARIABLES
 
 # The k anonymization factor
-K_FACTOR = 5
+K_FACTOR = 6
 
 # Weight of the Generalization Information Loss
 ALPHA = 1

@@ -1,0 +1,5 @@
+9
+education-num
+../data/adult_grouped_sample.csv
+../output/samples/education-num/
+equal

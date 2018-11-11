@@ -1,4 +1,4 @@
-import src.globals as GLOB
+import src.config as GLOB
 
 
 class NodeCluster:
