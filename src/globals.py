@@ -1,7 +1,7 @@
 # GLOBAL VARIABLES
 
 # The k anonymization factor
-K_FACTOR = 3
+K_FACTOR = 5
 
 # Weight of the Generalization Information Loss
 ALPHA = 1
@@ -10,7 +10,7 @@ ALPHA = 1
 TARGET = 'education-num'
 
 # Dataset file
-DATASET_CSV = '../data/adult_sample.csv'
+DATASET_CSV = '../data/adult_grouped_sample.csv'
 
 # Output directory
 OUTPUT_DIR = '../output/samples/' + TARGET + '/'
