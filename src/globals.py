@@ -1,7 +1,7 @@
 # GLOBAL VARIABLES
 
 # The k anonymization factor
-K_FACTOR = 11
+K_FACTOR = 3
 
 # Weight of the Generalization Information Loss
 ALPHA = 1
@@ -13,7 +13,7 @@ TARGET = 'education-num'
 DATASET_CSV = '../data/adult_sample.csv'
 
 # Output directory
-OUTPUT_DIR = '../output/samples/education-number/'
+OUTPUT_DIR = '../output/samples/' + TARGET + '/'
 
 # Directory containing hierarchies
 GENH_DIR = '../data/gen_hierarchies/'

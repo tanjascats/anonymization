@@ -33,6 +33,9 @@ def main():
     # Prepare io data structures
     # note: columns contain target attribute as well
     adults, columns, numerical, categorical = csv.read_dataset(GLOB.DATASET_CSV)
+    print("Dataset containing " + str(len(adults.items())) + " columns.")
+    print("k=" + str(GLOB.K_FACTOR))
+    print("Target: " + str(GLOB.TARGET))
     gen_hierarchies = prepare_gen_hierarchies_object(adults, numerical, categorical)
 
     # Main variables needed for SaNGreeA
