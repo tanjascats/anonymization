@@ -14,6 +14,7 @@ def read_config(config_file):
     config.TARGET = lines[1]
     config.DATASET_CSV = lines[2]
     config.OUTPUT_DIR = lines[3]
+    config.VECTOR = lines[4]
     file.close()
 
 def prepare_gen_hierarchies_object(dataset, numerical, categorical):
@@ -45,6 +46,7 @@ def run(config_file):
     print("Dataset containing " + str(len(adults.items())) + " columns.")
     print("k=" + str(config.K_FACTOR))
     print("Target: " + str(config.TARGET))
+    print("Attribute weights: " + config.VECTOR + "\n")
     gen_hierarchies = prepare_gen_hierarchies_object(adults, numerical, categorical)
 
     # Main variables needed for SaNGreeA

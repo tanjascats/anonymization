@@ -5,7 +5,7 @@ def main():
     for k in range(1):
         config_file = "../config/config_" + str(k)
         sangria.run(config_file)
-    # sangria.run()
+    # sangria.run("../config/config_test")
 
 if __name__ == '__main__':
     main()
