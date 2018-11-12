@@ -1,5 +1,5 @@
 23
 education-num
-../data/adult_grouped.csv
-../output/education-num/
+data/adult_grouped.csv
+output/education-num/
 emph_race

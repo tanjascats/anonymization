@@ -16,7 +16,7 @@ DATASET_CSV = '../data/adult_grouped_sample.csv'
 OUTPUT_DIR = '../output/samples/' + TARGET + '/'
 
 # Directory containing hierarchies
-GENH_DIR = '../data/gen_hierarchies/'
+GENH_DIR = 'data/gen_hierarchies/'
 
 # Generalization hierarchies
 GENH_FILE = {
