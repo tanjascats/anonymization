@@ -1,9 +1,7 @@
 import src.config as config
 
-out_dir = config.OUTPUT_DIR
-
-
 def output_csv(clusters, columns, outfile):
+    out_dir = config.OUTPUT_DIR
     out_string = ""
     for i, col in enumerate(columns):
         if i:
@@ -18,6 +16,7 @@ def output_csv(clusters, columns, outfile):
 
 
 def output_stats(clusters, end_time, adults, outfile):
+    out_dir = config.OUTPUT_DIR
     out_string = ""
     out_string += "Anonymized Adult dataset with " + str(len(adults.items())) + " entries and 12 attributes.\n"
     out_string += "k=" + str(config.K_FACTOR) + "\n"

@@ -92,6 +92,7 @@ def run(config_file):
     print("Successfully built " + str(len(clusters)) + " clusters.")
     print("Running time: " + str(end_time) + " seconds.")
 
+    print("Output file: " + config.OUTPUT_DIR)
     out.output_csv(clusters, columns, "anonymized_" + config.VECTOR + '_weights_k_' + str(config.K_FACTOR) + '.csv')
     out.output_stats(clusters, end_time, adults, "stats_k_" + str(config.K_FACTOR) + ".txt")
 

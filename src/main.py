@@ -7,5 +7,6 @@ def main():
         sangria.run(config_file)
     # sangria.run("../config/config_test")
 
+
 if __name__ == '__main__':
     main()
