@@ -51,29 +51,42 @@ GEN_WEIGHT_VECTORS = {
             'hours-per-week': 1.0/12.0
         }
     },
-    # necessary to change if I'm gonna use solutions with different weights
     'emph_race': {
         'categorical': {
-            'workclass': 0.02,
-            'native-country': 0.02,
-            'sex': 0.02,
-            'race': 0.9,
-            'marital-status': 0.02,
+            'workclass': 0.01,
+            'native-country': 0.01,
+            'sex': 0.01,
+            'race': 0.89,
+            'marital-status': 0.01,
+            'occupation': 0.01,
+            'relationship': 0.01,
+            'income': 0.01
         },
         'range': {
-            'age': 0.02,
+            'age': 0.01,
+            'education-num': 0.01,
+            'capital-gain': 0.01,
+            'capital-loss': 0.01,
+            'hours-per-week': 0.01
         }
     },
     'emph_age': {
         'categorical': {
-            'workclass': 0.02,
-            'native-country': 0.02,
-            'sex': 0.02,
-            'race': 0.02,
-            'marital-status': 0.02,
+            'workclass': 0.01,
+            'native-country': 0.01,
+            'sex': 0.01,
+            'race': 0.01,
+            'marital-status': 0.01,
+            'occupation': 0.01,
+            'relationship': 0.01,
+            'income': 0.01
         },
         'range': {
-            'age': 0.9,
+            'age': 0.89,
+            'education-num': 0.01,
+            'capital-gain': 0.01,
+            'capital-loss': 0.01,
+            'hours-per-week': 0.01
         }
     }
 }

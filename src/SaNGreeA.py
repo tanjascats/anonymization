@@ -17,6 +17,7 @@ def read_config(config_file):
     config.VECTOR = lines[4]
     file.close()
 
+
 def prepare_gen_hierarchies_object(dataset, numerical, categorical):
     gen_hierarchies_mine = {'categorical': {}, 'range': {}}
 

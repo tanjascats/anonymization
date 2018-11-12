@@ -1,5 +1,6 @@
 import src.SaNGreeA as sangria
 
+
 def main():
     # here goes definition of all config files and loop that runs the algorithm for each of them
     for k in range(10):

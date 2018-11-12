@@ -1,5 +1,5 @@
-9
+3
 education-num
 ../data/adult_grouped_sample.csv
-../output/education-num/
-equal
+../output/samples/education-num/
+emph_race
