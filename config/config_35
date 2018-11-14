@@ -1,0 +1,5 @@
+23
+marital-status
+./data/adult_grouped.csv
+./output/marital-status/
+emph_race
