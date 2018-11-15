@@ -174,7 +174,7 @@ plt.yticks(size=8)
 ax = fig.add_subplot(4,3,7)
 ax.set_xticklabels(xlabels)
 
-plt.plot(ticks, RF_equal_paper, marker='o', color='r')
+plt.plot(ticks, RF_equal_paper, marker='o', markersize=4, linewidth=1, color='r')
 plt.plot(ticks, RF, marker='o', markersize=4, linewidth=1, color='black')
 plt.plot(ticks, RF_ARX, marker='o', markersize=4, linewidth=1, color='grey')
 plt.ylabel('RANDOM FOREST\n\nF1 score')
