@@ -1,5 +1,5 @@
 19
 marital-status
-./data/adult_grouped.csv
+./data/adult_all.csv
 ./output/marital-status/
 emph_race
