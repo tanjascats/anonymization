@@ -1,0 +1,111 @@
+\documentclass{article}
+
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{url}
+\usepackage[]{algorithm2e}
+\usepackage{varioref}
+%\usepackage[backend=bibtex,style=verbose-trad2]{biblatex}
+
+\begin{document}
+\author{Tanja Šarčević}
+\title{Classification of k-anonymous datasets}
+\date{\today{}}
+\maketitle{} % generates title
+\tableofcontents{} % probably do not need this
+\newpage
+
+\section{Introduction}
+Anonymization techniques such as k-anonymity, as well as it's modifications l-diversity and t-closeness provide individuals' anonymity in datasets, but can significantly disturb the performance of machine learning algorithms. Yet, they are sometimes necessary to keep privacy of individuals datasets.
+\newpage
+
+\section{K-Anonymity}
+ K-anonymity is a property of a database to contain at least k-1 duplicate entries for every occuring combination of attributes. ONe can imagine this as a clustering problem with each cluster's quasi-identifier state being identical for every data point it contains. This can be achieved by supression and generalization, where by suppression we mean simple deletion, whereas generalization refers to a decrease in a value's granularity. As an example, in fig**** an input dataset has been transformed through k-anonymization into a clustered set with each cluster being at least of \textit{size=3}; thus the data is said to be 3-\textit{anonymized}.
+Generalization works through a concept called \textit{generalization hierarchies}, which run from leaf nodes denoting particular values via internal nodes to their most general root. In generalization process for k-anonymity, one traverses the tree from a leaf node of the original input value upwards until we can construct an equivalence group with all quasi-identifiers being duplicates of one another. 
+As each level of generalization invokes an increasing loss of specificity, we want to minimize a dataset's overall information loss. This makes k-anonymization an NP-hard problem due to an exponential number of possible data-row combinations one can examine.
+\newpage
+
+\section{Software and Methodologies}
+
+\subsection{Anonymization Algorithm}
+\paragraph{SaNGreeA}
+In the paper by Malle et al. \cite{malle2017not} experimentation is done using a version of a greedy clustering algorithm called SaNGreeA (Social network greedy clustering, \cite{campan2009data} in JavaScript. For this experiment the same algorithm is implemented in Python3 \cite{sarcevic2018sangreea} using the fragments of code from \cite{malle2016sangreea}. 
+SaNGreeA consists of two strategies for tabular as well as network anonymization, with two respective metrics for information loss. The \textit{Generallization Information Loss} or \textit{GIL} consists of a categorical and continuous part. Categorical part measures the distance of a generalization level from it's original leaf node in the generalization hierarchy, while the continuous part measures the range of a continuous-valued generalization devided by the whole range of the respective attribute. 
+
+Insert formula for GIL
+
+where:
+.....
+
+The total generalization information loss is then given by:
+insert formula for total GIL
+
+For the networking part of this algorithm the measure called \textit{structural information loss} or \textit{SIL} is introduced, however since we do not need this measure in this experiment, the details on the mathematical definition will be skipped. The reader is kindely reffered to the original paper \cite{campan2009data} for those details.
+
+SaNGreeA is a Social Network Greedy Anonymization algorithm based on the concept of greedy clustering. Normally, its input is given in the form of a graph structure, but since for the experimentation we don't use the networking part of the algorithm, the input is given as a list of feature vectors (in a CVS file). In order to compute its clusters, SaNGreeA takes into account GIL function, which measures the degree to which the features of a cluster would have to be generalized in order to incorporate a new node. Implementation of the algorithm also takes as an input the generalization hierarchies for each of the categorical features in form of json files. Algorithm \vref{sangreea} is showing the high level SaNGreeA algorithm.
+
+
+\begin{algorithm}[H]
+	\KwData{list of feature vectors, generalization hierarchies files, k anonymization factor, weights vector}
+	\KwResult{k-anonymous list of feature vectors}
+	reading input\;
+	\For{each unassigned feature vector}{
+		\If{number of unassigned feature vectors smaller than k}{
+		break\;
+		}
+		initialize a new cluster\;
+		mark feature vector as assigned to a new cluster\;
+		\While{size of the cluster smaller than k}{
+			\For{each unassigned candidate feature vector}{
+				compute GIL(candidate vector, cluster)\;
+				update best cost\;
+			}
+			add candidate with best cost to the current node\;
+			mark candidate as assigned to the current node\;
+		}
+	}
+	\For{each unassigned feature vectors}{
+		\For{each cluster}{
+			compute GIL(vector, cluster)\;
+			update best cost\;
+		}
+		add feature vector to the best cluster\;
+		mark the vector as assigned to the cluster\;
+	}	
+	\caption{SaNGreeA}\label{sangreea}
+ 	
+\end{algorithm}
+
+
+The algorithm starts with the first feature vector from the list and initiates the node with it. Subsequently it individually adds k-1 feature vectors to the cluster based on GIL value which is checked for each of the unassigned features and the current cluster. When cluster reaches k elements, the process continues with initializing a new cluster with the next unassigned feature vector. When there are less than k unassigned feature vectors left, they are dispersed among the existing clusters. The choice of clusters is also decided by calculating GIL. 
+Another interesting element of the algorithm are the weights that are giving the importance to attributes in the generalization process. GIL of each attribute is simply multiplied by attribute's weight, meaning that the larger weight we set for the attribute, more we prefer that attribute to stay ungeneralized over the others.
+The main drawback of this algorithm is its reduced algorithmic performance of ${O(n^2)}$ which for this experiments took up to 3 hours for one run.
+
+\paragraph{ARX}
+ARX \cite{prasser2015putting} is an open-source software for anonymizing personal data. The user can define their own hierarchies for quasi-identifiers, it contains the interface for comparing non- with anonymized data, as well as the solution space in lattice graph, statistical information, and much more features. It supports many privacy models including k-anonymity, l-diversity, t-closeness, differential privacy, ... The algorithm used for k-anonymization is called \textit{Flash} \cite{kohlmayer2012flash} and is much faster than our implemented algorithm.
+
+\subsection{Data}
+As input data the training set of the adults dataset from the UCI Machine Learning repository is used. The dataset contains 15 columns, and all but one were used for experimentation (column education is excluded since it contains duplicate data from education-num just as categorical values). There are approximately 32 000 entries in the original dataset, however for the experiments we use only rows without missing values, 30 162 of them. Another modification of the original adult dataset is made; the distribution of the values in the column \textit{native-country} is dominated by the value \textit{United-States} shown by the fact that \textit{United-States} is in 91.19\% of all the rows, and the remaining 8.81\% of the rows have some of the other 40 values. Therefore, the values for the column \textit{native-country} are changed to \textit{United-States} and \textit{non-US}. The distribution of values for every column of the modified dataset is shown in the fig.....
+
+Inset figure of all distributions
+
+\subsection{Classification}
+\newpage
+
+\section{Experiments}
+For the experimentation there were two main goals: reproducing the results from the section 4.2. Anonymized Datasets from the paper \cite{malle2017not} and the observation of algorithmic performance for multiple settings both for SaNGreeA and ARX. 
+
+We performed anonymization on the adult dataset for a range of values of \textit{k}, ${k \in \{3, 7, 11, 15, 19, 23, 27, 31, 35, 100\}}$. We are examining multi-class classification performance with two different targets, 'marital-status' and 'education-num'. For 'marital-status' we left the 7 categorical values in the original dataset unchanged, whereas we clustered the 16 continuous 'education-num' levels into the 4 groups 'elementary-school', 'high-school', 'college-up-to-Bachelors' and 'advanced-studies'. 
+Furthermore, to generate k-anonymized datasets we used each of these settings with three different weight vectors: (1) equal weights for all attributes, (2) age information preferred (${\omega(age)=0.88, \omega(other\_attributes)=0.01}$) and (3) race information preferred (${\omega(race)=0.88, \omega(other\_attributes)=0.01}$).
+We ran four different classifiers on the resulting data and computed their respective F1 score. The 4 classifiers used were \textit{gradient boosting}, \textit{random forest}, \textit{logistic regression} and \textit{linear SVC}. As each of the used classifiers were from scikit-learn, they all required some preprocessing as scikit-learn does not support categorical data for those calssifiers. For \textit{gradient boosting} and \textit{random forest} we used scikit-learn's LabelEncoder, and for the other two classifiers,  \textit{logistic regression} and \textit{linear SVC} we performed one-hot encoding.
+\newpage
+
+\section{Results}
+\newpage
+
+\section{Conclusion}
+
+Random citation of the main paper \cite{malle2017not} embedded in text.
+\bibliography{project-report}
+\bibliographystyle{ieeetr}
+\end{document}
