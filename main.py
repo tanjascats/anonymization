@@ -7,7 +7,7 @@ def main():
      #   config_file = "config/config_" + str(k)
       #  sangria.run(config_file)
     # sangria.run("../config/config_test")
-    sangria.run("./config/config_39")
+    sangria.run("./config/config_48")
 
 
 if __name__ == '__main__':

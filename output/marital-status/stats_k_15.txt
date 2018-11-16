@@ -1,6 +1,6 @@
 Anonymized Adult dataset with 30162 entries and 12 attributes.
 k=15
 Target attribute: marital-status
-Attribute weights: emph_race
+Attribute weights: emph_age
 Successfully built 2011 clusters.
-Running time: 14661 seconds.
+Running time: 13142 seconds.
