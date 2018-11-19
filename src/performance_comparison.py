@@ -105,7 +105,7 @@ ticks = k_values
 xlabels = list(k_values); xlabels[0] = "None"; xlabels[-1] = 100
 
 fig = plt.figure(figsize=(11,11))
-fig.suptitle('Multi-class classification on target education-num', fontsize=16)
+#fig.suptitle('Multi-class classification on target education-num', fontsize=16)
 
 # ----- LOGISTIC REGRESSION -----
 # --- equal weight - red ---
@@ -265,7 +265,7 @@ ticks = k_values
 xlabels = list(k_values); xlabels[0] = "None"; xlabels[-1] = 100
 
 fig = plt.figure(figsize=(11,11))
-fig.suptitle('Multi-class classification on target marital-status', fontsize=16)
+#fig.suptitle('Multi-class classification on target marital-status', fontsize=16)
 
 # ----- LOGISTIC REGRESSION -----
 # --- equal weight - red ---
