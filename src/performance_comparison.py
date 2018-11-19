@@ -45,9 +45,14 @@ def load_classification_results(weights, target_attribute):
         f1_scores_GB.append(scores['Gradient Boosting'])
         if 'Logistic Regression' in scores.keys():
             f1_scores_LR.append(scores['Logistic Regression'])
+        elif 'Logistic Regression number-encoded' in scores.keys():
+            f1_scores_LR.append(scores['Logistic Regression number-encoded'])
         else:
             f1_scores_LR.append(scores['Logistic Regression binary'])
-        f1_scores_LSVC.append(scores['Linear SVC'])
+        if 'Linear SVC' in scores.keys():
+            f1_scores_LSVC.append(scores['Linear SVC'])
+        else:
+            f1_scores_LSVC.append(scores['Linear SVC binary'])
         f1_scores_RF.append(scores['Random Forest'])
 
     return f1_scores_LR, f1_scores_LSVC, f1_scores_RF, f1_scores_GB
@@ -252,8 +257,8 @@ GB_race_paper = read_paper_results("../data/paper_results/GB_mar-stat_race.csv")
 
 # - my results
 LR, LSVC, RF, GB = load_classification_results("", "marital-status")
-#LR_age, LSVC_age, RF_age, GB_age = load_classification_results("emph_age", "marital-status")
-#LR_race, LSVC_race, RF_race, GB_race = load_classification_results("emph_race", "marital-status")
+LR_age, LSVC_age, RF_age, GB_age = load_classification_results("emph_age", "marital-status")
+LR_race, LSVC_race, RF_race, GB_race = load_classification_results("emph_race", "marital-status")
 
 # - Visualize
 ticks = k_values
@@ -281,10 +286,10 @@ ax.set_title('age preferred')
 ax.set_xticklabels(xlabels)
 
 line1, = plt.plot(ticks, LR_age_paper, marker='v', markersize=4, linewidth=1, color='b', label='Results from the paper')
-#line2, = plt.plot(ticks, LR_age, marker='v', markersize=4, linewidth=1, color='black', label='Results of this experiment')
+line2, = plt.plot(ticks, LR_age, marker='v', markersize=4, linewidth=1, color='black', label='Results of this experiment')
 plt.xticks(ticks, size=8)
 plt.yticks(size=8)
-plt.legend(handles=[line1], loc=1, prop={'size': 7})#, line2])
+plt.legend(handles=[line1, line2], loc=1, prop={'size': 7})
 
 # --- race preferred - green ---
 ax = fig.add_subplot(4,3,3)
@@ -292,10 +297,10 @@ ax.set_title('race preferred')
 ax.set_xticklabels(xlabels)
 
 line1, = plt.plot(ticks, LR_race_paper, marker='d', markersize=4, linewidth=1, color='g', label='Results from the paper')
-#line2, = plt.plot(ticks, LR_race, marker='d', markersize=4, linewidth=1, color='black', label='Results of this experiment')
+line2, = plt.plot(ticks, LR_race, marker='d', markersize=4, linewidth=1, color='black', label='Results of this experiment')
 plt.xticks(ticks, size=8)
 plt.yticks(size=8)
-plt.legend(handles=[line1], loc=1, prop={'size': 7})#, line2])
+plt.legend(handles=[line1, line2], loc=1, prop={'size': 7})
 
 # ----- LINEAR SVC -----
 # --- equal weights - red ---
@@ -313,7 +318,7 @@ ax = fig.add_subplot(4,3,5)
 ax.set_xticklabels(xlabels)
 
 plt.plot(ticks, LSVC_age_paper, marker='v', markersize=4, linewidth=1, color='b')
-#plt.plot(ticks, LSVC_age, marker='v', markersize=4, linewidth=1, color='black')
+plt.plot(ticks, LSVC_age, marker='v', markersize=4, linewidth=1, color='black')
 plt.xticks(ticks, size=8)
 plt.yticks(size=8)
 
@@ -322,7 +327,7 @@ ax = fig.add_subplot(4,3,6)
 ax.set_xticklabels(xlabels)
 
 plt.plot(ticks, LSVC_race_paper, marker='d', markersize=4, linewidth=1, color='g')
-#plt.plot(ticks, LSVC_race, marker='d', markersize=4, linewidth=1, color='black')
+plt.plot(ticks, LSVC_race, marker='d', markersize=4, linewidth=1, color='black')
 plt.xticks(ticks, size=8)
 plt.yticks(size=8)
 
@@ -342,7 +347,7 @@ ax = fig.add_subplot(4,3,8)
 ax.set_xticklabels(xlabels)
 
 plt.plot(ticks, RF_age_paper, marker='v', markersize=4, linewidth=1, color='b')
-#plt.plot(ticks, RF_age, marker='v', markersize=4, linewidth=1, color='black')
+plt.plot(ticks, RF_age, marker='v', markersize=4, linewidth=1, color='black')
 plt.xticks(ticks, size=8)
 plt.yticks(size=8)
 
@@ -351,7 +356,7 @@ ax = fig.add_subplot(4,3,9)
 ax.set_xticklabels(xlabels)
 
 plt.plot(ticks, RF_race_paper, marker='d', markersize=4, linewidth=1, color='g')
-#plt.plot(ticks, RF_race, marker='d', markersize=4, linewidth=1, color='black')
+plt.plot(ticks, RF_race, marker='d', markersize=4, linewidth=1, color='black')
 plt.xticks(ticks, size=8)
 plt.yticks(size=8)
 
@@ -372,7 +377,7 @@ ax = fig.add_subplot(4,3,11)
 ax.set_xticklabels(xlabels)
 
 plt.plot(ticks, GB_age_paper, marker='v', markersize=4, linewidth=1, color='b')
-#plt.plot(ticks, GB_age, marker='v', markersize=4, linewidth=1, color='black')
+plt.plot(ticks, GB_age, marker='v', markersize=4, linewidth=1, color='black')
 plt.xlabel('anonymization k-factor')
 plt.xticks(ticks, size=8)
 plt.yticks(size=8)
@@ -382,7 +387,7 @@ ax = fig.add_subplot(4,3,12)
 ax.set_xticklabels(xlabels)
 
 plt.plot(ticks, GB_race_paper, marker='d', markersize=4, linewidth=1, color='g')
-#plt.plot(ticks, GB_race, marker='d', markersize=4, linewidth=1, color='black')
+plt.plot(ticks, GB_race, marker='d', markersize=4, linewidth=1, color='black')
 plt.xlabel('anonymization k-factor')
 plt.xticks(ticks, size=8)
 plt.yticks(size=8)
