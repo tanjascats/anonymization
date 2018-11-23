@@ -260,6 +260,28 @@ LR, LSVC, RF, GB = load_classification_results("", "marital-status")
 LR_age, LSVC_age, RF_age, GB_age = load_classification_results("emph_age", "marital-status")
 LR_race, LSVC_race, RF_race, GB_race = load_classification_results("emph_race", "marital-status")
 
+# - ARX results
+# Linear SVC
+filepath = "../data/ARX/multi-class-mar/LSVC"
+with open(filepath) as f:
+    lines = f.readlines()
+LSVC_ARX = [float(score.rstrip('\n')) for score in lines]
+# Gradient Boosting by RapidMiner
+filepath = "../data/ARX/multi-class-mar/GB"
+with open(filepath) as f:
+    lines = f.readlines()
+GB_ARX = [float(score.rstrip('\n')) for score in lines]
+# Logistic Regression
+filepath = "../data/ARX/multi-class-mar/LR"
+with open(filepath) as f:
+    lines = f.readlines()
+LR_ARX = [float(score.rstrip('\n')) for score in lines]
+# Random Forest
+filepath = "../data/ARX/multi-class-mar/RF"
+with open(filepath) as f:
+    lines = f.readlines()
+RF_ARX = [float(score.rstrip('\n')) for score in lines]
+
 # - Visualize
 ticks = k_values
 xlabels = list(k_values); xlabels[0] = "None"; xlabels[-1] = 100
@@ -275,10 +297,11 @@ ax.set_xticklabels(xlabels)
 
 line1, = plt.plot(ticks, LR_equal_paper, marker='o', markersize=4, linewidth=1, color='r', label='Results from the paper')
 line2, = plt.plot(ticks, LR, marker='o', markersize=4, linewidth=1, color='black', label='Results of this experiment')
+line3, = plt.plot(ticks, LR_ARX, marker='o', markersize=4, linewidth=1, color='grey', label='Results from ARX')
 plt.ylabel('LOGISTIC REGRESSION\n\nf1 score')
 plt.xticks(ticks, size=8)
 plt.yticks(size=8)
-plt.legend(handles=[line1, line2], loc=1, prop={'size': 7})
+plt.legend(handles=[line1, line2, line3], loc=1, prop={'size': 7})
 
 # --- age preferred - blue ---
 ax = fig.add_subplot(4,3,2)
@@ -309,6 +332,7 @@ ax.set_xticklabels(xlabels)
 
 plt.plot(ticks, LSVC_equal_paper, marker='o', markersize=4, linewidth=1, color='r')
 plt.plot(ticks, LSVC, marker='o', markersize=4, linewidth=1, color='black')
+plt.plot(ticks, LSVC_ARX, marker='o', markersize=4, linewidth=1, color='grey')
 plt.ylabel('LINEAR SVC\n\nF1 score')
 plt.xticks(ticks, size=8)
 plt.yticks(size=8)
@@ -338,6 +362,7 @@ ax.set_xticklabels(xlabels)
 
 plt.plot(ticks, RF_equal_paper, marker='o', markersize=4, linewidth=1, color='r')
 plt.plot(ticks, RF, marker='o', markersize=4, linewidth=1, color='black')
+plt.plot(ticks, RF_ARX, marker='o', markersize=4, linewidth=1, color='grey')
 plt.ylabel('RANDOM FOREST\n\nF1 score')
 plt.xticks(ticks, size=8)
 plt.yticks(size=8)
@@ -367,6 +392,7 @@ ax.set_xticklabels(xlabels)
 
 plt.plot(ticks, GB_equal_paper, marker='o', markersize=4, linewidth=1, color='r')
 plt.plot(ticks, GB, marker='o', markersize=4, linewidth=1, color='black')
+plt.plot(ticks, GB_ARX, marker='o', markersize=4, linewidth=1, color='grey')
 plt.ylabel('GRADIENT BOOSTING\n\nF1 score')
 plt.xlabel('anonymization k-factor')
 plt.xticks(ticks, size=8)

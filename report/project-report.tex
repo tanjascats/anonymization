@@ -6,18 +6,17 @@
 \usepackage[]{algorithm2e}
 \usepackage{varioref}
 \usepackage{amsmath}
+\usepackage{authblk}
 \usepackage[labelfont=bf]{caption}
-
-%\usepackage[backend=bibtex,style=verbose-trad2]{biblatex}
 
 \begin{document}
 \author{Tanja Šarčević}
+\affil{TU Wien}
 \title{Classifier behavior on k-anonymous datasets \\ 
 	 \large Project report}
-\date{\today{}}
-\maketitle{} % generates title
-%\tableofcontents{} % probably do not need this
-%\newpage
+\date{November 19, 2018}
+%\date{\today{}}
+\maketitle{} 
 
 \section{Introduction}
 Highly growing trends in data generation are presenting today's governments, organizations and economies with challenges in the field of data security and privacy. Simultaneous need for publishing personal information for sake of statistical analysis and Machine Learning in order to increase quality levels in areas like medical services, while at the same time protecting the identity of individuals is one of the challenges. One specific challenge for data processing entities is imposed by the new European General Data Protection Regulations (GDPR) that took effect on June 1st, 2018, customers are given a \textit{right to be forgotten}, meaning that an organization is obligated to remove customer's personal data upon request. 
@@ -130,7 +129,7 @@ As input data, the training set of the Adults dataset from the UCI Machine Learn
 \subsection{Classification}
 Classification is done using classifiers from Python package, scikit-learn. For the experiments with ARX, we also used classifiers from Weka\footnote{https://www.cs.waikato.ac.nz/ml/weka/} and RapidMiner\footnote{https://rapidminer.com/} in order to obtain better results.
 
-\section{Experiments} \label{experiments}
+\section{Experiments} \label{sec:experiments}
 For the experimentation, there were two main goals: reproducing the results from section 4.2. Anonymized Datasets from the paper \cite{malle2017not} and the observation of algorithmic performance for multiple settings both for SaNGreeA and ARX. 
 
 We performed anonymization on the adult dataset for a range of values of \textit{k}, ${k \in \{3, 7, 11, 15, 19, 23, 27, 31, 35, 100\}}$. We are examining multi-class classification performance with two different targets, 'marital-status' and 'education-num'. For 'marital-status' we left the 7 categorical values in the original dataset unchanged, whereas we clustered the 16 continuous 'education-num' levels into the 4 groups 'elementary-school', 'high-school', 'college-up-to-Bachelors' and 'advanced-studies'. 
@@ -153,9 +152,9 @@ In the experiments with anonymous data obtained by ARX we had more freedom but t
  	\label{fig:marstat}
 \end{figure}
 
-As mentioned in section \ref{experiments}, we have done multi-class classification on two different targets: \textit{education-num} and \textit{marital-status}. Figure \ref{fig:edunum} shows results for target \textit{education-num}. The results from the paper \cite{malle2017not} are included in order to compare them to results in our experiments. For the target \textit{education-num} and classifier Logistic Regression, we obtained slightly better results for smaller values of \textit{k}, even though the main behaviour remained similar: the performance measured by F1 score gradually decreases as \textit{k} increases. It is interesting to observe that changing the weights of the attributes in our case does not result in such as fast decrease of the performance as it is the case for the results in the paper. In other cases, results seem to be close to those in the original ones, except for larger \textit{k}-s.
+As mentioned in section \ref{sec:experiments}, we have done multi-class classification on two different targets: \textit{education-num} and \textit{marital-status}. Figure \ref{fig:edunum} shows results for target \textit{education-num}. The results from the paper \cite{malle2017not} are included in order to compare them to results in our experiments. For the target \textit{education-num} and classifier Logistic Regression, we obtained slightly better results for smaller values of \textit{k}, even though the main behaviour remained similar: the performance measured by F1 score gradually decreases as \textit{k} increases. It is interesting to observe that changing the weights of the attributes in our case does not result in such as fast decrease of the performance as it is the case for the results in the paper. In other cases, results seem to be close to those in the original ones, except for larger \textit{k}-s.
 
-In section \ref{experiments} we mentioned two ways for anonymizing the dataset in ARX, globally (1) and locally (2). Besides those two methods, it was necessary to find a tradeoff between those two. Both techniques had one main drawback that leads to bad results. For global transformation, it's the fact that we unnecessarily lose a lot of information, when we could have obtained the same level of privacy by anonymizing fewer values. Local transformation seemed like the solution for that, in fact, it is, but only if we perform it for categorical data. By performing the local transformation on continuous data we are ending up with a mix of categorical (anonymized) and continuous (original) rows in the same attribute, which is already a problem for any classifier, not to mention a large number of values we obtain that way. Indeed, the main technique and most important part of the experiment with ARX in order to obtain good results was exactly to locally anonymize categorical data and globally continuous data. The performance results are shown in grey colour in figure \ref{fig:edunum} and are very similar to the results in the paper. 
+In section \ref{sec:experiments} we mentioned two ways for anonymizing the dataset in ARX, globally (1) and locally (2). Besides those two methods, it was necessary to find a tradeoff between those two. Both techniques had one main drawback that leads to bad results. For global transformation, it's the fact that we unnecessarily lose a lot of information, when we could have obtained the same level of privacy by anonymizing fewer values. Local transformation seemed like the solution for that, in fact, it is, but only if we perform it for categorical data. By performing the local transformation on continuous data we are ending up with a mix of categorical (anonymized) and continuous (original) rows in the same attribute, which is already a problem for any classifier, not to mention a large number of values we obtain that way. Indeed, the main technique and most important part of the experiment with ARX in order to obtain good results was exactly to locally anonymize categorical data and globally continuous data. The performance results are shown in grey colour in figure \ref{fig:edunum} and are very similar to the results in the paper. 
 
 Performance on target \textit{marital-status} (figure \ref{fig:marstat} is somewhat more similar to the original results than in the previous case. In almost every case we have similar behaviour - gradually worse performance with \textit{k} getting larger, and a drastic drop in the performance with \textit{k} reaching 100. 
 
