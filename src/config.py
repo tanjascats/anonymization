@@ -3,9 +3,6 @@
 # The k anonymization factor
 K_FACTOR = 6
 
-# Weight of the Generalization Information Loss
-ALPHA = 1
-
 # Target attribute
 TARGET = 'education-num'
 

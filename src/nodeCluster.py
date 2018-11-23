@@ -92,7 +92,7 @@ class NodeCluster:
 
     def compute_node_cost(self, node):
         gil = self.compute_gil(node)  # node is int index of row
-        return config.ALPHA * gil
+        return gil
 
     def to_string(self):
         out_string = ""
