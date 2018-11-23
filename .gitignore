@@ -1,2 +1,4 @@
 .idea/workspace.xml 
-venv/Lib/site-packages/setuptools-28.8.0-py3.7.egg 
+venv/Lib/site-packages/setuptools-28.8.0-py3.7.egg
+venv/ 
+.idea/ 

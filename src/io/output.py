@@ -1,9 +1,7 @@
-import src.globals as GLOB
-
-out_dir = GLOB.OUTPUT_DIR
-
+import src.config as config
 
 def output_csv(clusters, columns, outfile):
+    out_dir = config.OUTPUT_DIR
     out_string = ""
     for i, col in enumerate(columns):
         if i:
@@ -18,10 +16,12 @@ def output_csv(clusters, columns, outfile):
 
 
 def output_stats(clusters, end_time, adults, outfile):
+    out_dir = config.OUTPUT_DIR
     out_string = ""
     out_string += "Anonymized Adult dataset with " + str(len(adults.items())) + " entries and 12 attributes.\n"
-    out_string += "k=" + str(GLOB.K_FACTOR) + "\n"
-    out_string += "Target attribute: " + str(GLOB.TARGET) + "\n"
+    out_string += "k=" + str(config.K_FACTOR) + "\n"
+    out_string += "Target attribute: " + str(config.TARGET) + "\n"
+    out_string += "Attribute weights: " + config.VECTOR + "\n"
     out_string += "Successfully built " + str(len(clusters)) + " clusters.\n"
     out_string += "Running time: " + str(end_time) + " seconds.\n"
 

@@ -3,8 +3,19 @@ import src.io.output as out
 import src.catGenHierarchy as CGH
 import src.rangeGenHierarchy as RGH
 import src.nodeCluster as CL
-import src.globals as GLOB
+import src.config as config
 import time
+
+
+def read_config(config_file):
+    file = open(config_file, "r")
+    lines = file.read().splitlines()
+    config.K_FACTOR = int(lines[0])
+    config.TARGET = lines[1]
+    config.DATASET_CSV = lines[2]
+    config.OUTPUT_DIR = lines[3]
+    config.VECTOR = lines[4]
+    file.close()
 
 
 def prepare_gen_hierarchies_object(dataset, numerical, categorical):
@@ -12,7 +23,7 @@ def prepare_gen_hierarchies_object(dataset, numerical, categorical):
 
     # Prepare categorical attributes
     for cat_att in categorical:
-        genh = CGH.CatGenHierarchy(cat_att, GLOB.GENH_DIR + GLOB.GENH_FILE[cat_att])
+        genh = CGH.CatGenHierarchy(cat_att, config.GENH_DIR + config.GENH_FILE[cat_att])
         gen_hierarchies_mine['categorical'][cat_att] = genh
 
     # Prepare numerical attributes
@@ -27,12 +38,16 @@ def prepare_gen_hierarchies_object(dataset, numerical, categorical):
     return gen_hierarchies_mine
 
 
-def main():
+def run(config_file):
     print("Starting SaNGreeA algorithm...")
-
+    read_config(config_file)
     # Prepare io data structures
     # note: columns contain target attribute as well
-    adults, columns, numerical, categorical = csv.read_dataset(GLOB.DATASET_CSV)
+    adults, columns, numerical, categorical = csv.read_dataset(config.DATASET_CSV)
+    print("Dataset containing " + str(len(adults.items())) + " columns.")
+    print("k=" + str(config.K_FACTOR))
+    print("Target: " + str(config.TARGET))
+    print("Attribute weights: " + config.VECTOR + "\n")
     gen_hierarchies = prepare_gen_hierarchies_object(adults, numerical, categorical)
 
     # Main variables needed for SaNGreeA
@@ -56,7 +71,7 @@ def main():
 
         # SaNGreeA inner loop - Find nodes that minimize costs and
         # add them to the cluster until cluster_size reaches k
-        while len(cluster.get_nodes()) < GLOB.K_FACTOR:
+        while len(cluster.get_nodes()) < config.K_FACTOR:
             best_cost = float('inf')
             # candidates from
             for candidate, v in ((k, v) for (k, v) in adults.items() if k > node):
@@ -78,8 +93,13 @@ def main():
     print("Successfully built " + str(len(clusters)) + " clusters.")
     print("Running time: " + str(end_time) + " seconds.")
 
-    out.output_csv(clusters, columns, "anonymized_" + GLOB.VECTOR + '_weights_k_' + str(GLOB.K_FACTOR) + '.csv')
-    out.output_stats(clusters, end_time, adults, "stats_k_" + str(GLOB.K_FACTOR) + ".txt")
+    print("Output file: " + config.OUTPUT_DIR)
+    out.output_csv(clusters, columns, "anonymized_" + config.VECTOR + '_weights_k_' + str(config.K_FACTOR) + '.csv')
+    out.output_stats(clusters, end_time, adults, "stats_k_" + str(config.K_FACTOR) + ".txt")
+
+
+def main():
+    run()
 
 
 if __name__ == '__main__':

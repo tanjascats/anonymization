@@ -1,4 +1,4 @@
-import src.globals as GLOB
+import src.config as config
 
 import pandas as pd
 import numpy as np
@@ -24,10 +24,10 @@ def read_dataset(file_name):
     categorical = dataset_df.columns[dataset_df.dtypes == np.object].tolist()
     # categorical attributes
     numerical = dataset_df.columns[dataset_df.dtypes != np.object].tolist()
-    if GLOB.TARGET in categorical:
-        categorical.remove(GLOB.TARGET)
-    elif GLOB.TARGET in numerical:
-        numerical.remove(GLOB.TARGET)
+    if config.TARGET in categorical:
+        categorical.remove(config.TARGET)
+    elif config.TARGET in numerical:
+        numerical.remove(config.TARGET)
 
     return adults, columns, numerical, categorical
 

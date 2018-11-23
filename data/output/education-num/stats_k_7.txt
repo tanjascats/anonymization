@@ -1,0 +1,6 @@
+Anonymized Adult dataset with 30162 entries and 12 attributes.
+k=7
+Target attribute: education-num
+Attribute weights: equal
+Successfully built 4309 clusters.
+Running time: 12594 seconds.

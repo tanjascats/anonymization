@@ -1,0 +1,5 @@
+3
+education-num
+../data/adult_grouped_sample.csv
+../output/samples/education-num/
+emph_race

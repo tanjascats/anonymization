@@ -1,4 +1,4 @@
-import src.globals as GLOB
+import src.config as config
 
 
 class NodeCluster:
@@ -36,8 +36,8 @@ class NodeCluster:
 
     def compute_gil(self, node):
         costs = 0.0
-        weight_vector = GLOB.GEN_WEIGHT_VECTORS[GLOB.VECTOR]
-        # print weight_vector
+        weight_vector = config.GEN_WEIGHT_VECTORS[config.VECTOR]
+        # print(weight_vector)
 
         for genCatFeatureKey in self._genCatFeatures:
             weight = weight_vector['categorical'][genCatFeatureKey]
@@ -92,7 +92,7 @@ class NodeCluster:
 
     def compute_node_cost(self, node):
         gil = self.compute_gil(node)  # node is int index of row
-        return GLOB.ALPHA * gil
+        return gil
 
     def to_string(self):
         out_string = ""
