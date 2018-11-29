@@ -7,7 +7,7 @@ K_FACTOR = 6
 TARGET = 'education-num'
 
 # Dataset file
-DATASET_CSV = '../data/adult_grouped_sample.csv'
+DATASET_CSV = '../data/adult_grouped.csv'
 
 # Output directory
 OUTPUT_DIR = '../output/samples/' + TARGET + '/'

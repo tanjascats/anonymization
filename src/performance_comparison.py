@@ -31,13 +31,13 @@ def load_classification_results(weights, target_attribute):
     for k in k_values:
         # load results
         if k == -1:
-            infile = open('../output/' + target_attribute + '/classification-res/adult_multiclass_full', 'rb')
+            infile = open('../data/output/' + target_attribute + '/classification-res/adult_multiclass_full', 'rb')
         elif k == 39:
-            infile = open('../output/' + target_attribute + '/classification-res/adult_multiclass_' + weights + 'k100',
+            infile = open('../data/output/' + target_attribute + '/classification-res/adult_multiclass_' + weights + 'k100',
                           'rb')
         else:
             infile = open(
-                '../output/' + target_attribute + '/classification-res/adult_multiclass_' + weights + 'k' + str(k),
+                '../data/output/' + target_attribute + '/classification-res/adult_multiclass_' + weights + 'k' + str(k),
                 'rb')
         scores = pickle.load(infile)
         infile.close()
@@ -91,7 +91,7 @@ infile = open('../data/ARX/multi-class-edu/SVC_f1_scores', 'rb')
 LSVC_ARX = pickle.load(infile)
 infile.close()
 # Random Forest by Weka
-with open("../data/ARX/without-contin-hie/f1_scores_Random_Forest_Weka.txt") as f:
+with open("../data/ARX/multi-class-edu/f1_scores_Random_Forest_Weka.txt") as f:
     lines = f.readlines()
 RF_ARX = [float(score.rstrip('\n'))/100. for score in lines]
 # Gradient Boosting by RapidMiner
@@ -114,8 +114,8 @@ ax.set_title('equal weights')
 ax.set_xticklabels(xlabels)
 
 line1, = plt.plot(ticks, LR_equal_paper, marker='o', markersize=4, linewidth=1, color='r',
-                  label='Results from the paper')
-line2, = plt.plot(ticks, LR, marker='o', markersize=4, linewidth=1, color='black', label='Results of this experiment')
+                  label='Results from [2]')
+line2, = plt.plot(ticks, LR, marker='o', markersize=4, linewidth=1, color='black', label='Results in this paper')
 line3, = plt.plot(ticks, LR_ARX, marker='o', markersize=4, linewidth=1, color='grey', label='Results from ARX')
 plt.ylabel('LOGISTIC REGRESSION\n\nF1 score')
 plt.xticks(ticks, size=8)
@@ -127,8 +127,8 @@ ax = fig.add_subplot(4,3,2)
 ax.set_title('age preferred')
 ax.set_xticklabels(xlabels)
 
-line1, = plt.plot(ticks, LR_age_paper, marker='v', markersize=4, linewidth=1, color='b', label='Results from the paper')
-line2, = plt.plot(ticks, LR_age, marker='v', markersize=4, linewidth=1, color='black', label='Results of this experiment')
+line1, = plt.plot(ticks, LR_age_paper, marker='v', markersize=4, linewidth=1, color='b', label='Results from [2]')
+line2, = plt.plot(ticks, LR_age, marker='v', markersize=4, linewidth=1, color='black', label='Results in this paper')
 plt.xticks(ticks, size=8)
 plt.yticks(size=8)
 plt.legend(handles=[line1, line2], loc=1, prop={'size': 7})
@@ -138,8 +138,8 @@ ax = fig.add_subplot(4,3,3)
 ax.set_title('race preferred')
 ax.set_xticklabels(xlabels)
 
-line1, = plt.plot(ticks, LR_race_paper, marker='d', markersize=4, linewidth=1, color='g', label='Results from the paper')
-line2, = plt.plot(ticks, LR_race, marker='d', markersize=4, linewidth=1, color='black', label='Results of this experiment')
+line1, = plt.plot(ticks, LR_race_paper, marker='d', markersize=4, linewidth=1, color='g', label='Results from [2]')
+line2, = plt.plot(ticks, LR_race, marker='d', markersize=4, linewidth=1, color='black', label='Results in this paper')
 plt.xticks(ticks, size=8)
 plt.yticks(size=8)
 plt.legend(handles=[line1, line2], loc=1, prop={'size': 7})
@@ -295,8 +295,8 @@ ax = fig.add_subplot(4,3,1)
 ax.set_title('equal weights')
 ax.set_xticklabels(xlabels)
 
-line1, = plt.plot(ticks, LR_equal_paper, marker='o', markersize=4, linewidth=1, color='r', label='Results from the paper')
-line2, = plt.plot(ticks, LR, marker='o', markersize=4, linewidth=1, color='black', label='Results of this experiment')
+line1, = plt.plot(ticks, LR_equal_paper, marker='o', markersize=4, linewidth=1, color='r', label='Results from [2]')
+line2, = plt.plot(ticks, LR, marker='o', markersize=4, linewidth=1, color='black', label='Results in this paper')
 line3, = plt.plot(ticks, LR_ARX, marker='o', markersize=4, linewidth=1, color='grey', label='Results from ARX')
 plt.ylabel('LOGISTIC REGRESSION\n\nf1 score')
 plt.xticks(ticks, size=8)
@@ -308,8 +308,8 @@ ax = fig.add_subplot(4,3,2)
 ax.set_title('age preferred')
 ax.set_xticklabels(xlabels)
 
-line1, = plt.plot(ticks, LR_age_paper, marker='v', markersize=4, linewidth=1, color='b', label='Results from the paper')
-line2, = plt.plot(ticks, LR_age, marker='v', markersize=4, linewidth=1, color='black', label='Results of this experiment')
+line1, = plt.plot(ticks, LR_age_paper, marker='v', markersize=4, linewidth=1, color='b', label='Results from [2]')
+line2, = plt.plot(ticks, LR_age, marker='v', markersize=4, linewidth=1, color='black', label='Results in this paper')
 plt.xticks(ticks, size=8)
 plt.yticks(size=8)
 plt.legend(handles=[line1, line2], loc=1, prop={'size': 7})
@@ -319,8 +319,8 @@ ax = fig.add_subplot(4,3,3)
 ax.set_title('race preferred')
 ax.set_xticklabels(xlabels)
 
-line1, = plt.plot(ticks, LR_race_paper, marker='d', markersize=4, linewidth=1, color='g', label='Results from the paper')
-line2, = plt.plot(ticks, LR_race, marker='d', markersize=4, linewidth=1, color='black', label='Results of this experiment')
+line1, = plt.plot(ticks, LR_race_paper, marker='d', markersize=4, linewidth=1, color='g', label='Results from [2]')
+line2, = plt.plot(ticks, LR_race, marker='d', markersize=4, linewidth=1, color='black', label='Results in this paper')
 plt.xticks(ticks, size=8)
 plt.yticks(size=8)
 plt.legend(handles=[line1, line2], loc=1, prop={'size': 7})
