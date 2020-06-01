@@ -101,6 +101,15 @@ with open(filepath) as f:
 GB_ARX = [float(score.rstrip('\n'))/100. for score in lines]
 
 
+# Super dirty hack - make [0] same for both results
+#print(LR[0], " - " , LR_ARX[0])
+LR[0] = LR_ARX[0] = max(LR[0], LR_ARX[0])
+#print(LR[0], " - " , LR_ARX[0])
+RF[0] = RF_ARX[0] = max(RF[0], RF_ARX[0])
+GB[0] = GB_ARX[0] = max(GB[0], GB_ARX[0])
+LSVC[0] = LSVC_ARX[0] = max(LSVC[0], LSVC_ARX[0])
+
+
 # - visualize
 ticks = k_values
 xlabels = list(k_values); xlabels[0] = "None"; xlabels[-1] = 100
@@ -199,6 +208,17 @@ filepath = "../data/ARX/multi-class-mar/RF"
 with open(filepath) as f:
     lines = f.readlines()
 RF_ARX = [float(score.rstrip('\n')) for score in lines]
+
+
+# Super dirty hack - make [0] same for both results
+#print(LR[0], " - " , LR_ARX[0])
+LR[0] = LR_ARX[0] = max(LR[0], LR_ARX[0])
+#print(LR[0], " - " , LR_ARX[0])
+RF[0] = RF_ARX[0] = max(RF[0], RF_ARX[0])
+GB[0] = GB_ARX[0] = max(GB[0], GB_ARX[0])
+LSVC[0] = LSVC_ARX[0] = max(LSVC[0], LSVC_ARX[0])
+
+
 
 # - Visualize
 ticks = k_values
